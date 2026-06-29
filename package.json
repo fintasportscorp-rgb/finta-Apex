@@ -1,51 +1,16 @@
 {
-  "name": "cvapps",
-  "private": true,
+  "name": "workspace",
   "version": "0.0.0",
-  "type": "module",
+  "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "engine:test": "vitest run --reporter=verbose src/engine/__tests__/",
-    "engine:baseline": "tsx scripts/engine-baseline.ts"
+    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
+    "build": "pnpm run typecheck && pnpm -r --if-present run build",
+    "typecheck:libs": "tsc --build",
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
-  "dependencies": {
-    "@fontsource-variable/space-grotesk": "^5.2.10",
-    "@fontsource/ibm-plex-mono": "^5.2.7",
-    "@fontsource/ibm-plex-sans": "^5.2.8",
-    "@testing-library/dom": "^10.4.1",
-    "fflate": "^0.8.3",
-    "i18next": "^24.2.3",
-    "onnxruntime-web": "^1.20.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-i18next": "^15.4.1",
-    "react-router-dom": "^6.28.0"
-  },
+  "private": true,
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^22.10.2",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.19.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "globals": "^15.14.0",
-    "jsdom": "^26.1.0",
-    "tsx": "^4.22.4",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.23.0",
-    "vite": "^5.4.11",
-    "vite-plugin-pwa": "^0.21.1",
-    "vitest": "^2.1.8",
-    "workbox-window": "^7.3.0"
+    "prettier": "^3.8.4",
+    "typescript": "~5.9.3"
   }
 }
