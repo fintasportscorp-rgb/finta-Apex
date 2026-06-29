@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "AHvL2RNvCYHZ0iXM8A8kB"
+uri = "file://README.md"
+type = "text"
+title = "Apex — Complete README"
