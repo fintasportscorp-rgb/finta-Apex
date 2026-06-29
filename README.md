@@ -418,7 +418,7 @@ Both `netlify.toml` and `vercel.json` set these headers automatically.
 
 ## License
 
-Proprietary — all rights reserved. Contact [vistao.sports@gmail.com](mailto:vistao.sports@gmail.com) for licensing inquiries.
+Proprietary — all rights reserved. Contact [finta.sports.corp@gmail.com](mailto:finta.sports.corp@gmail.com) for licensing inquiries.
 
 ---
 
