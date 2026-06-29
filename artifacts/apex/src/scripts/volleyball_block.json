@@ -1,0 +1,381 @@
+{
+  "id": "volleyball_block",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "volleyball",
+  "gesture": "Contre (block)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_shoulder",
+    "right_shoulder",
+    "left_wrist",
+    "right_wrist"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "left_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "right_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "shoulder_tilt",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "left_arm_elevation",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "left_shoulder",
+        "left_wrist"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "right_arm_elevation",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_wrist"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    },
+    {
+      "id": "wrist_position_y",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_wrist",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "wrist_position_x",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_wrist",
+      "axis": "x",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : saut bilatéral symétrique, extension verticale des bras au-dessus du filet.",
+      "rationale_en": "Reference view: bilateral symmetric jump, vertical arm extension above net.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_shoulder",
+        "right_shoulder",
+        "left_wrist",
+        "right_wrist"
+      ],
+      "measures": [
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "left_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "left_shoulder",
+            "left_wrist"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "right_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_wrist"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "sagittal_right",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Profil : hauteur des bras au-dessus du filet et profondeur des doigts (penetration).",
+      "rationale_en": "Side view: arm height above the net and finger penetration depth.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_wrist",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "wrist_position_y",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_wrist",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "wrist_position_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_wrist",
+          "axis": "x",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_shoulder",
+        "right_shoulder",
+        "left_wrist",
+        "right_wrist"
+      ],
+      "measures": [
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "left_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "left_shoulder",
+            "left_wrist"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "right_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_wrist"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:right_knee_flexion",
+      "op": "falls_below",
+      "threshold": 155
+    },
+    "end": {
+      "signal": "rest",
+      "duration_s": 0.5
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 2
+  },
+  "outputs": [
+    "left_knee_flexion",
+    "right_knee_flexion",
+    "shoulder_tilt",
+    "left_arm_elevation",
+    "right_arm_elevation",
+    "wrist_speed",
+    "wrist_position_y",
+    "wrist_position_x"
+  ],
+  "report_highlights": [
+    "right_knee_flexion",
+    "shoulder_tilt"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "block_type",
+      "label": "Type de bloc",
+      "type": "single_select",
+      "options": [
+        "solo",
+        "collectif"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "volleyball"
+  }
+}

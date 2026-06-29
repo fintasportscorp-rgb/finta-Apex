@@ -1,0 +1,438 @@
+{
+  "id": "handball_jump_shot",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "handball",
+  "gesture": "Tir en suspension",
+  "description": "Tir en suspension : élévation épaule, extension coude, drive hanche. Usage : efficacité offensive, puissance.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "right_hip",
+    "right_knee"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "shoulder_elevation",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "elbow_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_drive",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    },
+    {
+      "id": "jump_height",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "arm_alignment_vertical",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : élévation bras, extension coude, hip drive, vitesse main — Wagner 2012.",
+      "rationale_en": "Reference view: arm elevation, elbow extension, hip drive, hand speed — Wagner 2012.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "right_hip",
+        "right_knee"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "elbow_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_drive",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : alignement vertical épaule-coude-poignet au release.",
+      "rationale_en": "Face-on: vertical shoulder-elbow-wrist alignment at release.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "arm_alignment_vertical",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "arm_alignment_vertical",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 0.5,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "falls_below",
+      "threshold": 2,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.15,
+    "max_duration_s": 3
+  },
+  "phases": [
+    {
+      "id": "armé",
+      "until": {
+        "signal": "angle:elbow_angle",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "frappe",
+      "until": {
+        "signal": "speed:wrist_speed",
+        "event": "peak"
+      }
+    },
+    {
+      "id": "accompagnement",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "speed:wrist_speed",
+    "event": "peak"
+  },
+  "outputs": [
+    "shoulder_elevation",
+    "elbow_angle",
+    "hip_drive",
+    "trunk_lean",
+    "wrist_speed",
+    "jump_height",
+    "shoulder_level",
+    "arm_alignment_vertical",
+    "shoulder_rotation",
+    "hip_rotation"
+  ],
+  "report_highlights": [
+    "elbow_angle",
+    "shoulder_elevation"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "laterality",
+      "label": "Côté dominant",
+      "type": "single_select",
+      "options": [
+        "droitier",
+        "gaucher"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "handball"
+  }
+}

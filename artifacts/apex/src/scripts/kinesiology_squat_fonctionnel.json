@@ -1,0 +1,508 @@
+{
+  "id": "kinesiology_squat_fonctionnel",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "kinesiology",
+  "gesture": "Squat fonctionnel (overhead squat)",
+  "description": "Évaluation du squat en vue frontale : valgus/varus de genou, symétrie gauche-droite, inclinaison latérale du tronc. Usage : bilan fonctionnel, rééducation, test du membre inférieur.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "knee_alignment_right",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_knee",
+      "reference": "right_ankle",
+      "expose": true
+    },
+    {
+      "id": "knee_alignment_left",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "left_knee",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "hip_drop",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "knee_angle_right",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": false
+    },
+    {
+      "id": "foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": false
+    },
+    {
+      "id": "foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "foot_speed",
+      "expose": true
+    },
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "spine_alignment_post",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "hip_center",
+        "shoulder_center"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "hip_level_post",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "knee_alignment_right_post",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_knee",
+      "reference": "right_ankle",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : knee tracking bilatéral, symétrie d'amortissement (FMS).",
+      "rationale_en": "Reference view: bilateral knee tracking, amortization symmetry (FMS).",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "knee_alignment_right",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_knee",
+          "reference": "right_ankle",
+          "expose": true
+        },
+        {
+          "id": "knee_alignment_left",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "left_knee",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_drop",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "knee_angle_right",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": false
+        },
+        {
+          "id": "foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": false
+        },
+        {
+          "id": "foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "foot_speed",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "sagittal_right",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Profil : amplitude descente, inclinaison tronc, hip-knee-ankle.",
+      "rationale_en": "Side view: descent amplitude, trunk inclination, hip-knee-ankle.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : alignement vertébral, bascule pelvienne et knee tracking bilatéral en descente de squat.",
+      "rationale_en": "Rear view: spine alignment, pelvic tilt and bilateral knee tracking during squat descent.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "spine_alignment_post",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "hip_center",
+            "shoulder_center"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "hip_level_post",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "knee_alignment_right_post",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_knee",
+          "reference": "right_ankle",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:knee_angle_right",
+      "op": "falls_below",
+      "threshold": 150,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "speed:foot_speed",
+      "op": "falls_below",
+      "threshold": 0.3,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 10
+  },
+  "phases": [
+    {
+      "id": "descente",
+      "until": {
+        "signal": "angle:knee_angle_right",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "remontee",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:knee_angle_right",
+    "event": "minimum"
+  },
+  "outputs": [
+    "knee_alignment_right",
+    "knee_alignment_left",
+    "hip_drop",
+    "shoulder_level",
+    "knee_angle",
+    "hip_angle",
+    "trunk_inclination",
+    "spine_alignment_post",
+    "hip_level_post",
+    "knee_alignment_right_post",
+    "shoulder_rotation",
+    "hip_rotation",
+    "foot_acceleration"
+  ],
+  "report_highlights": [
+    "knee_angle",
+    "hip_drop"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "rééducation",
+        "entraînement"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "depth",
+      "label": "Profondeur cible",
+      "type": "single_select",
+      "options": [
+        "quart de squat",
+        "demi-squat",
+        "complet"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

@@ -1,0 +1,262 @@
+{
+  "id": "athletics_blocks_start",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "athletics",
+  "gesture": "Départ blocs — poussée initiale",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_foot_index",
+    "right_heel"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 20%",
+  "measures": [
+    {
+      "id": "knee_extension",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_extension",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": true
+    },
+    {
+      "id": "foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "foot_speed",
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : drive angle, extension genou/hanche en push-off — observation 100 % sagittale.",
+      "rationale_en": "Reference view: drive angle, knee/hip extension at push-off — fully sagittal observation.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_foot_index",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "knee_extension",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_extension",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": true
+        },
+        {
+          "id": "foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "foot_speed",
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:right_foot_index",
+      "op": "rises_above",
+      "threshold": 0.5,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:right_foot_index",
+      "op": "rises_above",
+      "threshold": 2,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.1,
+    "max_duration_s": 1.5
+  },
+  "phases": [
+    {
+      "id": "poussee",
+      "until": {
+        "signal": "angle:knee_extension",
+        "event": "rises_to_max"
+      }
+    },
+    {
+      "id": "envol",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:knee_extension",
+    "event": "rises_to_max"
+  },
+  "outputs": [
+    "knee_extension",
+    "hip_extension",
+    "trunk_angle",
+    "foot_speed",
+    "foot_acceleration",
+    "foot_strike_angle"
+  ],
+  "report_highlights": [
+    "knee_extension",
+    "trunk_angle"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "starting_block_type",
+      "label": "Type de blocs",
+      "type": "single_select",
+      "options": [
+        "réglables",
+        "fixes",
+        "sans blocs"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "lane_number",
+      "label": "Numéro de couloir",
+      "type": "number",
+      "scope": "instance",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

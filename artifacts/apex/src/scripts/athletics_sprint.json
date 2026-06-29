@@ -1,0 +1,478 @@
+{
+  "id": "athletics_sprint",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "athletics",
+  "gesture": "Sprint — foulée (phase d'appui)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "both",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_foot_index",
+    "right_elbow",
+    "right_wrist",
+    "right_heel"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 20%",
+  "measures": [
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_flexion_left",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "ankle_dorsiflexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_knee",
+        "right_ankle",
+        "right_foot_index"
+      ],
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": true
+    },
+    {
+      "id": "foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "foot_speed",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_sway",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "arm_swing_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : flexion d'amortissement, extension de propulsion, dorsi-flexion à l'attaque.",
+      "rationale_en": "Reference view: amortization flexion, propulsion extension, ankle dorsi-flexion at contact.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_foot_index",
+        "right_elbow",
+        "right_wrist",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_flexion_left",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "ankle_dorsiflexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_knee",
+            "right_ankle",
+            "right_foot_index"
+          ],
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": true
+        },
+        {
+          "id": "foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "foot_speed",
+          "expose": true
+        },
+        {
+          "id": "arm_swing_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : symétrie inter-côtés et déport latéral du tronc en course.",
+      "rationale_en": "Face-on: cross-side symmetry and lateral trunk shift during running.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_sway",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_sway",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:right_foot_index",
+      "op": "falls_below",
+      "threshold": 0.3,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:right_foot_index",
+      "op": "rises_above",
+      "threshold": 0.6,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.05,
+    "max_duration_s": 0.4
+  },
+  "phases": [
+    {
+      "id": "contact",
+      "until": {
+        "signal": "angle:knee_flexion",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "propulsion",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:knee_flexion",
+    "event": "minimum"
+  },
+  "outputs": [
+    "knee_flexion",
+    "knee_flexion_left",
+    "ankle_dorsiflexion",
+    "trunk_inclination",
+    "foot_speed",
+    "arm_swing_angle",
+    "shoulder_level",
+    "hip_sway",
+    "shoulder_rotation",
+    "hip_rotation",
+    "foot_acceleration",
+    "foot_strike_angle"
+  ],
+  "report_highlights": [
+    "knee_flexion",
+    "trunk_inclination"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "surface_type",
+      "label": "Surface",
+      "type": "single_select",
+      "options": [
+        "piste synthétique",
+        "gazon",
+        "béton"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "shoe_type",
+      "label": "Type de chaussure",
+      "type": "single_select",
+      "options": [
+        "spikes",
+        "running",
+        "autre"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": [
+    {
+      "right": "knee_flexion",
+      "left": "knee_flexion_left"
+    }
+  ]
+}

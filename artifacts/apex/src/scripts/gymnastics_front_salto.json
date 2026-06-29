@@ -1,0 +1,204 @@
+{
+  "id": "gymnastics_front_salto",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "gymnastics",
+  "gesture": "Salto avant",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_rotation",
+      "primitive": "rotation",
+      "mode": "orientation",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": false
+    },
+    {
+      "id": "foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "foot_speed",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : rotation avant dans le plan sagittal, groupé, ouverture — Yeadon 2000.",
+      "rationale_en": "Reference view: forward rotation in sagittal plane, tuck, opening — Yeadon 2000.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_rotation",
+          "primitive": "rotation",
+          "mode": "orientation",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": false
+        },
+        {
+          "id": "foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "foot_speed",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:foot_speed",
+      "op": "rises_above",
+      "threshold": 1
+    },
+    "end": {
+      "signal": "speed:foot_speed",
+      "op": "falls_below",
+      "threshold": 0.5
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 2
+  },
+  "outputs": [
+    "knee_flexion",
+    "hip_flexion",
+    "trunk_rotation",
+    "foot_acceleration"
+  ],
+  "report_highlights": [
+    "knee_flexion",
+    "hip_flexion"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "takeoff_type",
+      "label": "Type d'appel",
+      "type": "single_select",
+      "options": [
+        "deux pieds",
+        "un pied"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

@@ -1,0 +1,300 @@
+{
+  "id": "boxing_footwork",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "boxing",
+  "gesture": "Jeu de jambes (footwork)",
+  "description": "Déplacement continu en vue frontale : flexion des genoux, niveau hanches, mobilité latérale. Usage : fluidité défensive.",
+  "movement_type": "continuous",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "feet_separation",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_ankle",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "hip_height",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "left_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "right_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "feet_separation_overhead",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_ankle",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "hip_path",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : écartement des pieds, stabilité du centre de gravité, alignement.",
+      "rationale_en": "Reference view: foot spacing, center-of-gravity stability, alignment.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "overhead",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Plongée : trajectoires des pieds et écartement absolu �\u001d vue d'enseignement classique du footwork.",
+      "rationale_en": "Overhead: foot paths and absolute spacing �\u001d classic footwork teaching view.",
+      "feasibility_2d": "limited",
+      "side": "both",
+      "required_visible": [
+        "left_ankle",
+        "right_ankle",
+        "hip_center"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation_overhead",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_path",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "cyclic",
+    "event": {
+      "signal": "speed:ankle_speed",
+      "event": "peak"
+    }
+  },
+  "outputs": [
+    "feet_separation",
+    "hip_height",
+    "left_knee_flexion",
+    "right_knee_flexion",
+    "feet_separation_overhead",
+    "hip_path"
+  ],
+  "report_highlights": [
+    "right_knee_flexion",
+    "hip_height"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": [
+    {
+      "right": "right_knee_flexion",
+      "left": "left_knee_flexion"
+    }
+  ]
+}

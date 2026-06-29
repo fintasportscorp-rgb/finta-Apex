@@ -1,0 +1,326 @@
+{
+  "id": "gymnastics_cartwheel",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "gymnastics",
+  "gesture": "Roue (cartwheel)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_shoulder",
+    "right_shoulder",
+    "left_wrist",
+    "right_wrist",
+    "left_hip",
+    "right_hip",
+    "left_ankle",
+    "right_ankle"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "left_arm",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "left_shoulder",
+        "left_wrist"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "right_arm",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_wrist"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "shoulder_tilt",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_tilt",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "legs_separation",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_ankle",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "spine_alignment",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "hip_center",
+        "shoulder_center"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : rotation latérale dans le plan frontal, écart des jambes au sommet.",
+      "rationale_en": "Reference view: lateral rotation in frontal plane, leg split at apex.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_wrist",
+        "right_wrist",
+        "left_hip",
+        "right_hip",
+        "left_ankle",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "left_arm",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "left_shoulder",
+            "left_wrist"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "right_arm",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_wrist"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "shoulder_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "legs_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Vue arrière : alignement de la colonne et symétrie d'écart des jambes.",
+      "rationale_en": "Rear view: spine alignment and leg-split symmetry.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "spine_alignment",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "hip_center",
+            "shoulder_center"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:shoulder_tilt",
+      "op": "rises_above",
+      "threshold": 15
+    },
+    "end": {
+      "signal": "angle:shoulder_tilt",
+      "op": "falls_below",
+      "threshold": 10
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 3
+  },
+  "outputs": [
+    "left_arm",
+    "right_arm",
+    "shoulder_tilt",
+    "hip_tilt",
+    "legs_separation",
+    "spine_alignment",
+    "shoulder_rotation",
+    "hip_rotation"
+  ],
+  "report_highlights": [
+    "shoulder_tilt",
+    "hip_tilt"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "direction",
+      "label": "Direction",
+      "type": "single_select",
+      "options": [
+        "droite",
+        "gauche"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

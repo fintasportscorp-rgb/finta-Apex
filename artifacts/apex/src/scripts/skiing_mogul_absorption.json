@@ -1,0 +1,270 @@
+{
+  "id": "skiing_mogul_absorption",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "skiing",
+  "gesture": "Absorption en bosses (moguls)",
+  "description": "Absorption de bosse en vue sagittale : flexion rapide genou/hanche, amortissement. Usage : ski de bosses.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "knee_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "knee_angle",
+      "expose": true
+    },
+    {
+      "id": "knee_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "knee_ang_speed",
+      "expose": true
+    },
+    {
+      "id": "ankle_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_ankle",
+      "expose": false
+    },
+    {
+      "id": "ankle_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "ankle_speed",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : flexion-extension verticale rapide, maintien tronc stable.",
+      "rationale_en": "Reference view: rapid vertical flexion-extension, stable trunk.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "knee_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "knee_angle",
+          "expose": true
+        },
+        {
+          "id": "knee_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "knee_ang_speed",
+          "expose": true
+        },
+        {
+          "id": "ankle_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_ankle",
+          "expose": false
+        },
+        {
+          "id": "ankle_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "ankle_speed",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:knee_angle",
+      "op": "falls_below",
+      "threshold": 120,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "speed:ankle_speed",
+      "op": "falls_below",
+      "threshold": 0.3,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 8
+  },
+  "phases": [
+    {
+      "id": "absorption",
+      "until": {
+        "signal": "angle:knee_angle",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "extension",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:knee_angle",
+    "event": "minimum"
+  },
+  "outputs": [
+    "knee_angle",
+    "hip_angle",
+    "trunk_inclination",
+    "knee_ang_speed",
+    "knee_ang_acceleration",
+    "ankle_acceleration"
+  ],
+  "report_highlights": [
+    "knee_angle",
+    "trunk_inclination"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "condition",
+      "label": "Condition",
+      "type": "single_select",
+      "options": [
+        "simulation à sec",
+        "neige",
+        "vidéo"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

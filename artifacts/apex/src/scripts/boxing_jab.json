@@ -1,0 +1,319 @@
+{
+  "id": "boxing_jab",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "boxing",
+  "gesture": "Direct avant (jab)",
+  "description": "Direct avant en vue sagittale : extension coude, pivot épaule, vitesse poignet. Usage : précision, timing.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "right_hip"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "elbow_extension",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "shoulder_elevation",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "weight_transfer",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "guard_height",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "left_wrist",
+      "axis": "y",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : extension du coude et trajectoire linéaire du poing.",
+      "rationale_en": "Reference view: elbow extension and linear fist trajectory.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "elbow_extension",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : rotation épaule-hanche et transfert de poids — puissance et garde du jab.",
+      "rationale_en": "Face-on: shoulder-hip rotation and weight transfer — jab power and guard position.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip",
+        "left_wrist"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "weight_transfer",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "guard_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "left_wrist",
+          "axis": "y",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 1.5,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "falls_below",
+      "threshold": 0.4,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.15,
+    "max_duration_s": 3
+  },
+  "phases": [
+    {
+      "id": "extension",
+      "until": {
+        "signal": "angle:elbow_extension",
+        "event": "maximum"
+      }
+    },
+    {
+      "id": "retrait",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "speed:wrist_speed",
+    "event": "peak"
+  },
+  "outputs": [
+    "elbow_extension",
+    "shoulder_elevation",
+    "trunk_lean",
+    "wrist_speed",
+    "shoulder_rotation",
+    "hip_rotation",
+    "weight_transfer",
+    "guard_height"
+  ],
+  "report_highlights": [
+    "elbow_extension",
+    "shoulder_elevation"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "laterality",
+      "label": "Côté dominant",
+      "type": "single_select",
+      "options": [
+        "droitier",
+        "gaucher"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

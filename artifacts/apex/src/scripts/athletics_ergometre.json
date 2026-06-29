@@ -1,0 +1,438 @@
+{
+  "id": "athletics_ergometre",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "athletics",
+  "gesture": "Ergomètre / tapis roulant — cycle de course",
+  "description": "Analyse biomécanique du mouvement de course sur ergomètre ou tapis roulant : inclinaison du tronc, flexion-extension hanche et genou, angle de coude, symétrie de foulée. Usage : test d'effort, rééducation à la course, entraînement.",
+  "movement_type": "continuous",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "both",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_foot_index",
+    "right_heel"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 20%",
+  "measures": [
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "cadence",
+      "primitive": "cadence",
+      "mode": "cyclic",
+      "source_measure": "knee_flexion",
+      "expose": true
+    },
+    {
+      "id": "knee_flexion_left",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "elbow_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "knee_flexion",
+      "expose": true
+    },
+    {
+      "id": "knee_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "knee_ang_speed",
+      "expose": true
+    },
+    {
+      "id": "foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": true
+    },
+    {
+      "id": "foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "foot_speed",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_sway",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : flexion/extension genou-hanche au cycle, inclinaison tronc, angle de coude — protocole course sur ergomètre.",
+      "rationale_en": "Reference view: knee-hip flexion/extension per cycle, trunk inclination, elbow angle — ergometer running protocol.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_foot_index",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "cadence",
+          "primitive": "cadence",
+          "mode": "cyclic",
+          "source_measure": "knee_flexion",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion_left",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "elbow_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "knee_flexion",
+          "expose": true
+        },
+        {
+          "id": "knee_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "knee_ang_speed",
+          "expose": true
+        },
+        {
+          "id": "foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": true
+        },
+        {
+          "id": "foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "foot_speed",
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : symétrie d'oscillation latérale du bassin et niveau d'épaules en course ergomètre.",
+      "rationale_en": "Face-on: lateral pelvic sway symmetry and shoulder level during ergometer running.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_sway",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "cyclic",
+    "cycle_signal": "knee_flexion",
+    "boundary": "local_maxima",
+    "min_period_s": 0.3
+  },
+  "outputs": [
+    "knee_flexion",
+    "knee_flexion_left",
+    "hip_angle",
+    "trunk_inclination",
+    "elbow_angle",
+    "knee_ang_speed",
+    "foot_speed",
+    "shoulder_level",
+    "hip_sway",
+    "shoulder_rotation",
+    "hip_rotation",
+    "knee_ang_acceleration",
+    "foot_acceleration",
+    "foot_strike_angle",
+    "cadence"
+  ],
+  "report_highlights": [
+    "knee_flexion",
+    "trunk_inclination"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "speed_target",
+      "label": "Vitesse cible (km/h)",
+      "type": "number",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "incline",
+      "label": "Inclinaison (%)",
+      "type": "number",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "ergometer_type",
+      "label": "Type d'ergomètre",
+      "type": "single_select",
+      "options": [
+        "tapis roulant",
+        "ergomètre course",
+        "autre"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": [
+    {
+      "right": "knee_flexion",
+      "left": "knee_flexion_left"
+    }
+  ]
+}

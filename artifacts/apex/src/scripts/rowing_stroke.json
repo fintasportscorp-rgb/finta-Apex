@@ -1,0 +1,396 @@
+{
+  "id": "rowing_stroke",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "rowing",
+  "gesture": "Coup de rame complet (cycle de référence)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "both",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 15%",
+  "measures": [
+    {
+      "id": "trunk_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "elbow_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "trunk_angle",
+      "expose": true
+    },
+    {
+      "id": "trunk_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "trunk_ang_speed",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : cycle complet catch-drive-finish-recovery (Steer 2006).",
+      "rationale_en": "Reference view: full catch-drive-finish-recovery cycle (Steer 2006).",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "measures": [
+        {
+          "id": "trunk_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "elbow_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "trunk_angle",
+          "expose": true
+        },
+        {
+          "id": "trunk_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "trunk_ang_speed",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on (ergomètre uniquement) : symétrie inter-côtés en cycle complet.",
+      "rationale_en": "Face-on (ergometer only): cross-side symmetry during full cycle.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:trunk_angle",
+      "op": "falls_below",
+      "threshold": 70,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "angle:elbow_angle",
+      "op": "falls_below",
+      "threshold": 100,
+      "unit": "deg"
+    },
+    "min_duration_s": 0.4,
+    "max_duration_s": 3
+  },
+  "phases": [
+    {
+      "id": "attaque",
+      "until": {
+        "signal": "angle:knee_angle",
+        "event": "rises_to_max"
+      }
+    },
+    {
+      "id": "poussee",
+      "until": {
+        "signal": "angle:trunk_angle",
+        "event": "rises_to_max"
+      }
+    },
+    {
+      "id": "traction",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:trunk_angle",
+    "event": "rises_to_max"
+  },
+  "outputs": [
+    "trunk_angle",
+    "knee_angle",
+    "elbow_angle",
+    "trunk_ang_speed",
+    "shoulder_level",
+    "hip_level",
+    "shoulder_rotation",
+    "hip_rotation",
+    "trunk_ang_acceleration"
+  ],
+  "report_highlights": [
+    "trunk_angle",
+    "trunk_ang_speed"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "boat_type",
+      "label": "Type d'embarcation",
+      "type": "single_select",
+      "options": [
+        "skiff",
+        "double",
+        "quatre",
+        "huit"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "stroke_rate_target",
+      "label": "Cadence cible (coups/min)",
+      "type": "number",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

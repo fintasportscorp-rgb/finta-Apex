@@ -1,0 +1,314 @@
+{
+  "id": "kinesiology_posture_sagittale",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "kinesiology",
+  "gesture": "Posture statique — vue sagittale",
+  "description": "Évaluation posturale en vue sagittale. Applicable à toute position debout statique : yoga, tai chi, bilan postural, programmation neuro-posturale. L'utilisateur précisera le nom de la position.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_ankle",
+    "right_knee",
+    "right_hip",
+    "right_shoulder",
+    "right_ear"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "head_forward",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_ear",
+      "reference": "right_shoulder",
+      "expose": true
+    },
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "pelvic_tilt",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "hip_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_hip",
+      "expose": false
+    },
+    {
+      "id": "hip_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "hip_speed",
+      "expose": true
+    },
+    {
+      "id": "spine_alignment_post",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "hip_center",
+        "shoulder_center"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level_post",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_level_post",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : ligne de gravité (malléole-genou-trochanter-épaule-oreille).",
+      "rationale_en": "Reference view: plumb line (malleolus-knee-trochanter-shoulder-ear).",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_ankle",
+        "right_knee",
+        "right_hip",
+        "right_shoulder",
+        "right_ear"
+      ],
+      "measures": [
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "head_forward",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ear",
+          "reference": "right_shoulder",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "pelvic_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "hip_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_hip",
+          "expose": false
+        },
+        {
+          "id": "hip_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "hip_speed",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Vue arrière : alignement postural de la colonne et symétrie épaules/hanches — complément à l'examen sagittal.",
+      "rationale_en": "Rear view: spine alignment and shoulder/hip symmetry — complementary to the sagittal exam.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "measures": [
+        {
+          "id": "spine_alignment_post",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "hip_center",
+            "shoulder_center"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "shoulder_level_post",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_level_post",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "rest"
+    },
+    "end": {
+      "signal": "speed:hip_speed",
+      "op": "rises_above",
+      "threshold": 0.15,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 1,
+    "max_duration_s": 30
+  },
+  "outputs": [
+    "trunk_inclination",
+    "head_forward",
+    "knee_flexion",
+    "pelvic_tilt",
+    "spine_alignment_post",
+    "shoulder_level_post",
+    "hip_level_post",
+    "hip_acceleration"
+  ],
+  "report_highlights": [
+    "trunk_inclination",
+    "knee_flexion"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "rééducation",
+        "entraînement"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "position_name",
+      "label": "Nom de la position / exercice",
+      "type": "text",
+      "scope": "instance",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

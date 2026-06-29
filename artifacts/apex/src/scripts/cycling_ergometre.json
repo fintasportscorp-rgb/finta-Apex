@@ -1,0 +1,455 @@
+{
+  "id": "cycling_ergometre",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "cycling",
+  "gesture": "Ergomètre vélo — cycle de pédalage",
+  "description": "Analyse biomécanique du pédalage sur vélo stationnaire/ergomètre : angles genou et hanche à PMH/PMB, inclinaison du tronc, angle de coude, déport latéral de bassin. Usage : bike fit ergomètre, test d'effort, rééducation cycliste.",
+  "movement_type": "continuous",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "both",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_foot_index",
+    "right_heel"
+  ],
+  "height": "hip",
+  "distance_rule": "corps entier + 15%",
+  "measures": [
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "cadence",
+      "primitive": "cadence",
+      "mode": "cyclic",
+      "source_measure": "knee_angle",
+      "expose": true
+    },
+    {
+      "id": "knee_angle_left",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "ankle_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_knee",
+        "right_ankle",
+        "right_foot_index"
+      ],
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "elbow_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "knee_angle",
+      "expose": true
+    },
+    {
+      "id": "knee_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "knee_ang_speed",
+      "expose": true
+    },
+    {
+      "id": "knee_alignment_right",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_knee",
+      "reference": "right_ankle",
+      "expose": true
+    },
+    {
+      "id": "knee_alignment_left",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "left_knee",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "hip_sway",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : amplitude genou-hanche au cycle, angles à PMH/PMB, inclinaison tronc et coude — méthodologie bike fit ergomètre.",
+      "rationale_en": "Reference view: knee-hip range per cycle, angles at TDC/BDC, trunk and elbow inclination — ergometer bike fit methodology.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_foot_index",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "cadence",
+          "primitive": "cadence",
+          "mode": "cyclic",
+          "source_measure": "knee_angle",
+          "expose": true
+        },
+        {
+          "id": "knee_angle_left",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "ankle_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_knee",
+            "right_ankle",
+            "right_foot_index"
+          ],
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "elbow_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "knee_angle",
+          "expose": true
+        },
+        {
+          "id": "knee_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "knee_ang_speed",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : knee tracking vertical bilatéral (knee-in / knee-out) et déport latéral de bassin sur ergomètre.",
+      "rationale_en": "Face-on: bilateral vertical knee tracking (knee-in / knee-out) and lateral hip sway on ergometer.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "knee_alignment_right",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_knee",
+          "reference": "right_ankle",
+          "expose": true
+        },
+        {
+          "id": "knee_alignment_left",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "left_knee",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_sway",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "cyclic",
+    "cycle_signal": "knee_angle",
+    "boundary": "local_maxima",
+    "min_period_s": 0.5
+  },
+  "outputs": [
+    "knee_angle",
+    "knee_angle_left",
+    "hip_angle",
+    "ankle_angle",
+    "trunk_inclination",
+    "elbow_angle",
+    "knee_ang_speed",
+    "knee_alignment_right",
+    "knee_alignment_left",
+    "hip_sway",
+    "shoulder_rotation",
+    "hip_rotation",
+    "knee_ang_acceleration",
+    "foot_strike_angle",
+    "cadence"
+  ],
+  "report_highlights": [
+    "knee_angle",
+    "trunk_inclination"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "cadence_target",
+      "label": "Cadence cible (rpm)",
+      "type": "number",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "resistance_level",
+      "label": "Résistance",
+      "type": "single_select",
+      "options": [
+        "faible",
+        "modérée",
+        "élevée"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "ergometer_type",
+      "label": "Type d'ergomètre",
+      "type": "single_select",
+      "options": [
+        "vélo stationnaire",
+        "home trainer",
+        "ergomètre Watt"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": [
+    {
+      "right": "knee_angle",
+      "left": "knee_angle_left"
+    },
+    {
+      "right": "knee_alignment_right",
+      "left": "knee_alignment_left"
+    }
+  ]
+}

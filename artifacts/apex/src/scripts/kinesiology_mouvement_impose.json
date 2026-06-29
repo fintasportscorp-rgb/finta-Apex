@@ -1,0 +1,464 @@
+{
+  "id": "kinesiology_mouvement_impose",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "kinesiology",
+  "gesture": "Mouvement imposé (évaluation fonctionnelle)",
+  "description": "Évaluation générique d'un mouvement imposé ou prescrit : angles articulaires des membres supérieurs et inférieurs, inclinaison du tronc, ROM global. Usage : rééducation fonctionnelle, bilan articulaire, prescription motrice, protocole de test imposé.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_shoulder",
+    "right_shoulder"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "knee_angle_right",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_angle_left",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle_right",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle_left",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_shoulder",
+        "left_hip",
+        "left_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "elbow_angle_right",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "elbow_angle_left",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_shoulder",
+        "left_elbow",
+        "left_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "shoulder_abduction_right",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "hip_drop",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": false
+    },
+    {
+      "id": "trunk_inclination_sag",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "hip_center",
+        "shoulder_center"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : symétrie articulaire bilatérale, bascule du bassin, alignement des épaules — évaluation fonctionnelle de mouvement imposé.",
+      "rationale_en": "Reference view: bilateral joint symmetry, pelvic tilt, shoulder alignment — functional assessment of imposed movement.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle_right",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_angle_left",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_drop",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "elbow_angle_right",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "elbow_angle_left",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_shoulder",
+            "left_elbow",
+            "left_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_abduction_right",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": false
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "sagittal_right",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Profil : inclinaison du tronc, flexion-extension hanche et genou, alignement vertical du centre de masse.",
+      "rationale_en": "Side view: trunk inclination, hip and knee flexion-extension, vertical alignment of center of mass.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "hip_angle_right",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination_sag",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "hip_center",
+            "shoulder_center"
+          ],
+          "axis": "vertical",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 0.2,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "falls_below",
+      "threshold": 0.1,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 30
+  },
+  "outputs": [
+    "knee_angle_right",
+    "knee_angle_left",
+    "hip_angle_right",
+    "hip_angle_left",
+    "elbow_angle_right",
+    "elbow_angle_left",
+    "shoulder_abduction_right",
+    "trunk_inclination",
+    "hip_drop",
+    "shoulder_level",
+    "trunk_inclination_sag",
+    "shoulder_rotation",
+    "hip_rotation"
+  ],
+  "report_highlights": [
+    "knee_angle_right",
+    "trunk_inclination"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "movement_name",
+      "label": "Nom du mouvement imposé",
+      "type": "text",
+      "scope": "instance",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "rééducation",
+        "entraînement"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "laterality",
+      "label": "Côté évalué",
+      "type": "single_select",
+      "options": [
+        "bilatéral",
+        "droit",
+        "gauche"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": [
+    {
+      "right": "knee_angle_right",
+      "left": "knee_angle_left"
+    },
+    {
+      "right": "hip_angle_right",
+      "left": "hip_angle_left"
+    },
+    {
+      "right": "elbow_angle_right",
+      "left": "elbow_angle_left"
+    }
+  ]
+}

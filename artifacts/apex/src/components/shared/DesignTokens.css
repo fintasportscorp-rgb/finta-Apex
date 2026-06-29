@@ -1,0 +1,479 @@
+/* Aurora 2030 — glassmorphic design system.
+   Replaces the spec-08 token system. Old names (--ink, --surface, --line, --accent, --muted, --graphite-*)
+   are preserved as aliases so existing inline styles keep working with the new aesthetic. */
+
+:root {
+  /* ── Aurora canvas ─────────────────────────────────────────────────────── */
+  --void:           #020d0e;
+  --void-2:         #04181a;
+  --void-3:         #071e20;
+
+  /* Three aurora hotspots that drift across the canvas */
+  --aurora-violet:  #076b72;
+  --aurora-cyan:    #7cf1f9;
+  --aurora-mint:    #46acb3;
+  --aurora-pink:    #2a8b92;
+
+  /* ── Ink scale (light text on dark) ────────────────────────────────────── */
+  --ink-1:          #e8feff;   /* primary text / headings */
+  --ink-2:          #b5d8db;   /* body */
+  --ink-3:          #7aa5a9;   /* muted / labels */
+  --ink-4:          #3d6b6f;   /* faint hint */
+
+  /* ── Accents ───────────────────────────────────────────────────────────── */
+  --accent-1:       #7cf1f9;   /* primary action (light teal) */
+  --accent-1-deep:  #076b72;
+  --accent-2:       #61ced6;   /* secondary teal */
+  --accent-3:       #46acb3;   /* tertiary teal */
+  --accent-warn:    #7cf1f9;   /* brightest teal for attention */
+  --accent-pink:    #2a8b92;
+
+  /* ── Glass surfaces ────────────────────────────────────────────────────── */
+  --glass-1:        rgba(255, 255, 255, 0.04);   /* faint film */
+  --glass-2:        rgba(255, 255, 255, 0.07);   /* default panel */
+  --glass-3:        rgba(255, 255, 255, 0.11);   /* elevated */
+  --glass-4:        rgba(255, 255, 255, 0.16);   /* hover / pressed */
+  --glass-tint-violet: rgba(7, 107, 114, 0.10);
+  --glass-tint-cyan:   rgba(124, 241, 249, 0.10);
+  --glass-tint-mint:   rgba(70, 172, 179, 0.10);
+
+  --glass-edge:        rgba(255, 255, 255, 0.10);
+  --glass-edge-strong: rgba(255, 255, 255, 0.20);
+  --glass-edge-faint:  rgba(255, 255, 255, 0.06);
+
+  --glass-blur:        blur(24px) saturate(160%);
+  --glass-blur-soft:   blur(14px) saturate(140%);
+  --glass-blur-strong: blur(40px) saturate(180%);
+
+  /* Layered shadow: deep ambient + soft skirt + inner highlight */
+  --shadow-glass:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 30px 60px -20px rgba(0, 0, 0, 0.55),
+    0 8px 24px -6px rgba(0, 0, 0, 0.35);
+  --shadow-glass-strong:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 40px 80px -16px rgba(0, 0, 0, 0.65),
+    0 12px 30px -8px rgba(0, 0, 0, 0.45);
+  --shadow-float:
+    0 24px 48px -16px rgba(0, 0, 0, 0.55),
+    0 6px 14px -4px rgba(0, 0, 0, 0.35);
+
+  /* ── Glow tokens (radial halos) ────────────────────────────────────────── */
+  --glow-accent: 0 0 32px rgba(124, 241, 249, 0.45), 0 0 80px rgba(7, 107, 114, 0.25);
+  --glow-cyan:   0 0 32px rgba(97, 206, 214, 0.40),  0 0 80px rgba(97, 206, 214, 0.20);
+  --glow-mint:   0 0 32px rgba(70, 172, 179, 0.40),  0 0 80px rgba(70, 172, 179, 0.20);
+  --glow-warn:   0 0 28px rgba(124, 241, 249, 0.40);
+  --glow-pink:   0 0 32px rgba(42, 139, 146, 0.40);
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-ui:      'IBM Plex Sans', system-ui, sans-serif;
+  --font-data:    'IBM Plex Mono', 'Courier New', monospace;
+
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   20px;
+  --text-xl:   28px;
+  --text-2xl:  40px;
+  --text-hero: 56px;
+  --text-mega: 88px;
+
+  /* ── Spacing — 4 px grid ──────────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Radii (softer, more 2030) ────────────────────────────────────────── */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-pill: 999px;
+
+  /* ── Motion ────────────────────────────────────────────────────────────── */
+  --ease-fluid:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-back:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+
+  --dur-fast:  180ms;
+  --dur-base:  280ms;
+  --dur-slow:  600ms;
+  --dur-epic:  1200ms;
+
+  /* keep old vars as semantic aliases */
+  --transition-fast: var(--dur-fast) var(--ease-out);
+  --transition-base: var(--dur-base) var(--ease-fluid);
+
+  /* ── Spec-08 backward-compat aliases (do NOT remove) ───────────────────── */
+  --ink:        var(--ink-1);
+  --surface:    var(--void-2);
+  --line:       var(--glass-edge);
+  --accent:     var(--accent-1);
+  --muted:      var(--ink-3);
+  --graphite:   var(--ink-1);
+
+  --graphite-15: rgba(232, 254, 255, 0.15);
+  --graphite-35: rgba(232, 254, 255, 0.35);
+  --graphite-60: rgba(232, 254, 255, 0.60);
+  --graphite-85: rgba(232, 254, 255, 0.85);
+
+  --border: 1px solid var(--glass-edge);
+}
+
+/* ── Base reset ──────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  color: var(--ink-1);
+  background: var(--void);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--void);
+  color: var(--ink-2);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── Global Aurora background — applied to body via ::before / ::after ──── */
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+
+body::before {
+  background:
+    radial-gradient(40% 35% at 18% 22%, var(--aurora-violet) 0%, transparent 60%),
+    radial-gradient(38% 32% at 82% 28%, var(--aurora-cyan) 0%, transparent 62%),
+    radial-gradient(46% 38% at 50% 95%, var(--aurora-mint) 0%, transparent 65%);
+  opacity: 0.55;
+  filter: blur(60px);
+  animation: aurora-drift-a 32s var(--ease-in-out) infinite alternate;
+}
+
+body::after {
+  background:
+    radial-gradient(34% 30% at 78% 78%, var(--aurora-pink) 0%, transparent 60%),
+    radial-gradient(30% 26% at 10% 70%, var(--aurora-violet) 0%, transparent 60%);
+  opacity: 0.42;
+  filter: blur(80px);
+  animation: aurora-drift-b 44s var(--ease-in-out) infinite alternate;
+  mix-blend-mode: screen;
+}
+
+@keyframes aurora-drift-a {
+  0%   { transform: translate3d(0, 0, 0)        rotate(0deg)  scale(1);    opacity: 0.55; }
+  50%  { transform: translate3d(6%, -4%, 0)     rotate(8deg)  scale(1.08); opacity: 0.70; }
+  100% { transform: translate3d(-4%, 6%, 0)     rotate(-6deg) scale(1.04); opacity: 0.60; }
+}
+
+@keyframes aurora-drift-b {
+  0%   { transform: translate3d(0, 0, 0)        rotate(0deg)  scale(1);    opacity: 0.42; }
+  50%  { transform: translate3d(-7%, 5%, 0)     rotate(-10deg) scale(1.12); opacity: 0.55; }
+  100% { transform: translate3d(5%, -3%, 0)     rotate(6deg)  scale(1.06); opacity: 0.48; }
+}
+
+/* Ensure app content sits above the aurora layer */
+#root, #app-root {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+}
+
+/* Custom thin scrollbars matching the aesthetic */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--glass-3);
+  border-radius: var(--radius-pill);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--glass-4); }
+
+/* Selection */
+::selection {
+  background: rgba(124, 241, 249, 0.35);
+  color: var(--ink-1);
+}
+
+/* ── Glass utility classes ───────────────────────────────────────────────── */
+
+.glass {
+  background: var(--glass-2);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-lg);
+}
+
+.glass-soft {
+  background: var(--glass-1);
+  border: 1px solid var(--glass-edge-faint);
+  backdrop-filter: var(--glass-blur-soft);
+  -webkit-backdrop-filter: var(--glass-blur-soft);
+  border-radius: var(--radius-md);
+}
+
+.glass-strong {
+  background: var(--glass-3);
+  border: 1px solid var(--glass-edge-strong);
+  backdrop-filter: var(--glass-blur-strong);
+  -webkit-backdrop-filter: var(--glass-blur-strong);
+  box-shadow: var(--shadow-glass-strong);
+  border-radius: var(--radius-lg);
+}
+
+.glow-accent { box-shadow: var(--glass-blur), var(--glow-accent); }
+.glow-cyan   { box-shadow: var(--glow-cyan); }
+.glow-mint   { box-shadow: var(--glow-mint); }
+.glow-warn   { box-shadow: var(--glow-warn); }
+
+/* Shimmer border — animated gradient outline (used on featured CTAs) */
+.shimmer-border {
+  position: relative;
+  isolation: isolate;
+}
+.shimmer-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent-1),
+    var(--accent-2),
+    var(--accent-3),
+    var(--accent-pink),
+    var(--accent-1)
+  );
+  -webkit-mask:
+    linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: shimmer-spin 6s linear infinite;
+  opacity: 0.85;
+}
+
+@keyframes shimmer-spin {
+  to { transform: rotate(1turn); }
+}
+
+/* Breathing glow — used on idle accents and CTAs */
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 20px rgba(124, 241, 249, 0.35), 0 0 50px rgba(7, 107, 114, 0.20); }
+  50%      { box-shadow: 0 0 36px rgba(124, 241, 249, 0.55), 0 0 80px rgba(7, 107, 114, 0.35); }
+}
+.breathe { animation: breathe 4.2s var(--ease-in-out) infinite; }
+
+/* Gradient text — used sparingly on display headings */
+.gradient-text {
+  background: linear-gradient(118deg, var(--ink-1) 0%, var(--accent-2) 45%, var(--accent-1) 80%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-aurora {
+  background: linear-gradient(118deg, #FFFFFF 0%, var(--accent-3) 30%, var(--accent-2) 55%, var(--accent-1) 85%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+
+/* Rise-in entrance — used on screen mount */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise-in { animation: rise-in var(--dur-slow) var(--ease-fluid) both; }
+.rise-in-delay-1 { animation: rise-in var(--dur-slow) var(--ease-fluid) 80ms both; }
+.rise-in-delay-2 { animation: rise-in var(--dur-slow) var(--ease-fluid) 160ms both; }
+.rise-in-delay-3 { animation: rise-in var(--dur-slow) var(--ease-fluid) 240ms both; }
+.rise-in-delay-4 { animation: rise-in var(--dur-slow) var(--ease-fluid) 320ms both; }
+
+/* Slide-up entrance — used on bottom-sheet modals */
+@keyframes slide-up {
+  from { transform: translateY(80px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.slide-up { animation: slide-up var(--dur-slow) var(--ease-fluid) both; }
+
+/* Fade-in overlay */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.fade-in { animation: fade-in var(--dur-base) var(--ease-out) both; }
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Number ticker — for fluid count-up readouts (CSS-driven, no JS needed for static values) */
+.ticker {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' on, 'ss01' on;
+}
+
+/* ── Buttons — utility classes (use these instead of duplicating inline styles) ── */
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  min-height: 44px;
+  border: 1px solid transparent;
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-1-deep) 100%);
+  color: white;
+  box-shadow: 0 8px 24px -8px rgba(7, 107, 114, 0.65), var(--glow-accent);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px -10px rgba(7, 107, 114, 0.8), 0 0 48px rgba(124, 241, 249, 0.55);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-secondary {
+  background: var(--glass-2);
+  color: var(--ink-1);
+  border-color: var(--glass-edge);
+  backdrop-filter: var(--glass-blur-soft);
+  -webkit-backdrop-filter: var(--glass-blur-soft);
+}
+.btn-secondary:hover {
+  background: var(--glass-4);
+  border-color: var(--glass-edge-strong);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-3);
+  border-color: transparent;
+}
+.btn-ghost:hover { color: var(--ink-1); background: var(--glass-1); }
+
+.btn-danger {
+  background: var(--glass-2);
+  color: var(--accent-warn);
+  border-color: rgba(124, 241, 249, 0.35);
+}
+.btn-danger:hover {
+  background: rgba(124, 241, 249, 0.12);
+  border-color: var(--accent-warn);
+  box-shadow: var(--glow-warn);
+}
+
+/* ── Inputs ─────────────────────────────────────────────────────────────── */
+
+.input-aurora {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--ink-1);
+  background: var(--glass-1);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius-md);
+  padding: 12px var(--space-4);
+  outline: none;
+  width: 100%;
+  backdrop-filter: var(--glass-blur-soft);
+  -webkit-backdrop-filter: var(--glass-blur-soft);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.input-aurora option {
+  background: #04181a;
+  color: #e8feff;
+}
+.input-aurora::placeholder { color: var(--ink-2); }
+.input-aurora:focus {
+  border-color: rgba(124, 241, 249, 0.55);
+  background: var(--glass-2);
+  box-shadow: 0 0 0 4px rgba(124, 241, 249, 0.12);
+}
+
+/* ── Typography helpers ──────────────────────────────────────────────────── */
+
+.display { font-family: var(--font-display); letter-spacing: -0.02em; }
+.mono    { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+
+.label-tag {
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  body::before, body::after {
+    animation: none !important;
+  }
+}

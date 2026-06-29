@@ -1,0 +1,230 @@
+{
+  "id": "badminton_serve_long",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "badminton",
+  "gesture": "Service long (high serve)",
+  "description": "Service long en vue sagittale : trajectoire bras, drive hanche. Usage : mise en jeu offensive.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "right_hip"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "shoulder_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "expose": true
+    },
+    {
+      "id": "elbow_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "wrist_position_y",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_wrist",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : frappe underhand sagittale, amplitude verticale.",
+      "rationale_en": "Reference view: underhand sagittal stroke, vertical amplitude.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "expose": true
+        },
+        {
+          "id": "elbow_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_position_y",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_wrist",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 1,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "falls_below",
+      "threshold": 0.3,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.15,
+    "max_duration_s": 3
+  },
+  "phases": [
+    {
+      "id": "armé",
+      "until": {
+        "signal": "angle:elbow_angle",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "frappe",
+      "until": {
+        "signal": "speed:wrist_speed",
+        "event": "peak"
+      }
+    },
+    {
+      "id": "accompagnement",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "speed:wrist_speed",
+    "event": "peak"
+  },
+  "outputs": [
+    "shoulder_angle",
+    "elbow_angle",
+    "wrist_position_y",
+    "wrist_speed"
+  ],
+  "report_highlights": [
+    "elbow_angle",
+    "shoulder_angle"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "laterality",
+      "label": "Côté dominant",
+      "type": "single_select",
+      "options": [
+        "droitier",
+        "gaucher"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "badminton"
+  }
+}

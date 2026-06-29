@@ -1,0 +1,377 @@
+{
+  "id": "badminton_lunge",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "badminton",
+  "gesture": "Fente avant (lunge)",
+  "description": "Fente vers le filet : flexion genou avant, inclinaison tronc, extension cheville. Usage : déplacement offensif.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_foot_index",
+    "right_heel"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "front_knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "ankle_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_knee",
+        "right_ankle",
+        "right_foot_index"
+      ],
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "ankle_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_ankle",
+      "expose": false
+    },
+    {
+      "id": "ankle_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "ankle_speed",
+      "expose": true
+    },
+    {
+      "id": "knee_alignment_x",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_knee",
+      "reference": "right_ankle",
+      "expose": true
+    },
+    {
+      "id": "hip_drop",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : flexion genou, inclinaison tronc, dorsi-flexion cheville — Kuntze 2010.",
+      "rationale_en": "Reference view: knee flexion, trunk lean, ankle dorsi-flexion — Kuntze 2010.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_foot_index",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "front_knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "ankle_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_knee",
+            "right_ankle",
+            "right_foot_index"
+          ],
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "ankle_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_ankle",
+          "expose": false
+        },
+        {
+          "id": "ankle_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "ankle_speed",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : alignement vertical genou-cheville (prévention LCA, knee-over-toe).",
+      "rationale_en": "Face-on: vertical knee-ankle alignment (ACL injury prevention, knee-over-toe).",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "left_hip",
+        "left_knee"
+      ],
+      "measures": [
+        {
+          "id": "knee_alignment_x",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_knee",
+          "reference": "right_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_drop",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "left_hip",
+        "left_knee"
+      ],
+      "measures": [
+        {
+          "id": "knee_alignment_x",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_knee",
+          "reference": "right_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_drop",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:front_knee_angle",
+      "op": "falls_below",
+      "threshold": 135,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "speed:ankle_speed",
+      "op": "falls_below",
+      "threshold": 0.3,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 8
+  },
+  "phases": [
+    {
+      "id": "fente",
+      "until": {
+        "signal": "angle:front_knee_angle",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "retour",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:front_knee_angle",
+    "event": "minimum"
+  },
+  "outputs": [
+    "front_knee_angle",
+    "hip_angle",
+    "ankle_angle",
+    "trunk_lean",
+    "knee_alignment_x",
+    "hip_drop",
+    "ankle_acceleration",
+    "foot_strike_angle"
+  ],
+  "report_highlights": [
+    "front_knee_angle",
+    "trunk_lean"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "badminton"
+  }
+}
