@@ -1,0 +1,225 @@
+{
+  "id": "archery_release",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "archery",
+  "gesture": "Lâcher (release)",
+  "description": "Phase de lâcher en vue sagittale : extension bras tirant, stabilité bras d'arc. Usage : régularité déclenchement.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "right_hip"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "draw_arm_elevation",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "draw_elbow",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : pic de vitesse main tirante et trajectoire horizontale du poignet �\u001d invariants du release.",
+      "rationale_en": "Reference view: peak draw-hand speed and horizontal wrist trajectory �\u001d release invariants.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "draw_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "draw_elbow",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 0.6,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "falls_below",
+      "threshold": 0.2,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.1,
+    "max_duration_s": 1.5
+  },
+  "phases": [
+    {
+      "id": "lacher",
+      "until": {
+        "signal": "speed:wrist_speed",
+        "event": "peak"
+      }
+    },
+    {
+      "id": "suivi",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "speed:wrist_speed",
+    "event": "peak"
+  },
+  "outputs": [
+    "draw_arm_elevation",
+    "draw_elbow",
+    "trunk_lean",
+    "wrist_speed"
+  ],
+  "report_highlights": [
+    "draw_elbow",
+    "trunk_lean"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "laterality",
+      "label": "Côté dominant",
+      "type": "single_select",
+      "options": [
+        "droitier",
+        "gaucher"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,492 @@
+{
+  "id": "football_kick",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "football",
+  "gesture": "Frappe (instep kick) — armé à impact",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_foot_index",
+    "right_shoulder",
+    "right_heel"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 20%",
+  "measures": [
+    {
+      "id": "hip_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "ankle_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_knee",
+        "right_ankle",
+        "right_foot_index"
+      ],
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": true
+    },
+    {
+      "id": "foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "foot_speed",
+      "expose": true
+    },
+    {
+      "id": "feet_separation",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_ankle",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "hip_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "hip_shoulder_separation",
+      "primitive": "rotation",
+      "mode": "separation",
+      "points": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : amplitude backswing, extension genou, pic vitesse pied — Lees 2010 / Nunome 2002.",
+      "rationale_en": "Reference view: backswing amplitude, knee extension, peak foot speed — Lees 2010 / Nunome 2002.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_foot_index",
+        "right_shoulder",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "hip_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "ankle_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_knee",
+            "right_ankle",
+            "right_foot_index"
+          ],
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": true
+        },
+        {
+          "id": "foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "foot_speed",
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : position du pied d'appui par rapport à la balle (distance et orientation).",
+      "rationale_en": "Face-on: support foot position relative to the ball (distance and orientation).",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_ankle",
+        "right_ankle",
+        "left_hip",
+        "right_hip",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_shoulder_separation",
+          "primitive": "rotation",
+          "mode": "separation",
+          "points": [
+            "left_shoulder",
+            "right_shoulder",
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_ankle",
+        "right_ankle",
+        "left_hip",
+        "right_hip",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "hip_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_shoulder_separation",
+          "primitive": "rotation",
+          "mode": "separation",
+          "points": [
+            "left_shoulder",
+            "right_shoulder",
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:knee_angle",
+      "op": "falls_below",
+      "threshold": 130,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "speed:right_foot_index",
+      "op": "falls_below",
+      "threshold": 0.5,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.15,
+    "max_duration_s": 1.5
+  },
+  "phases": [
+    {
+      "id": "arme",
+      "until": {
+        "signal": "angle:knee_angle",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "acceleration",
+      "until": {
+        "signal": "speed:right_foot_index",
+        "event": "peak"
+      }
+    },
+    {
+      "id": "contact",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "speed:right_foot_index",
+    "event": "peak"
+  },
+  "outputs": [
+    "hip_flexion",
+    "knee_angle",
+    "ankle_angle",
+    "foot_speed",
+    "trunk_lean",
+    "feet_separation",
+    "hip_level",
+    "shoulder_rotation",
+    "hip_rotation",
+    "hip_shoulder_separation",
+    "foot_acceleration",
+    "foot_strike_angle"
+  ],
+  "report_highlights": [
+    "foot_speed",
+    "knee_angle"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "kick_type",
+      "label": "Type de frappe",
+      "type": "single_select",
+      "options": [
+        "plat du pied",
+        "coup de pied",
+        "extérieur"
+      ],
+      "scope": "instance",
+      "required": false
+    },
+    {
+      "id": "distance_but",
+      "label": "Distance au but (m)",
+      "type": "number",
+      "scope": "instance",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "football"
+  }
+}

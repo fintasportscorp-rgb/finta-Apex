@@ -1,0 +1,65 @@
+/* ContextView — responsive layout */
+
+.context-columns {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 640px) {
+  .context-columns {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .context-col {
+    flex: 1 1 calc(50% - var(--space-3));
+    min-width: 0;
+  }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 960px) {
+  .context-col {
+    flex: 1 1 0;
+  }
+}
+
+/* Scroll-to-top button — mobile only */
+.context-scroll-top {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2) 0;
+}
+
+@media (min-width: 640px) {
+  .context-scroll-top {
+    display: none;
+  }
+}
+
+.context-scroll-top button {
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: var(--glass-1);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.context-scroll-top button:hover {
+  color: var(--ink-1);
+  border-color: var(--glass-edge-active);
+}

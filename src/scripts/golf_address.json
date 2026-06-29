@@ -1,0 +1,480 @@
+{
+  "id": "golf_address",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "golf",
+  "gesture": "Posture d'adresse (setup)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_wrist",
+    "nose"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "hip_hinge",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "arm_hang",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_wrist"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": false
+    },
+    {
+      "id": "feet_separation",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_ankle",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_shoulder_separation",
+      "primitive": "rotation",
+      "mode": "separation",
+      "points": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "head_stability",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "nose",
+      "axis": "x",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence (down-the-line) : spine tilt, hip hinge, arm hang sont dans le plan sagittal.",
+      "rationale_en": "Reference view (down-the-line): spine tilt, hip hinge, arm hang are in the sagittal plane.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_wrist",
+        "nose"
+      ],
+      "measures": [
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "hip_hinge",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "arm_hang",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_wrist"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": false
+        },
+        {
+          "id": "head_stability",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "nose",
+          "axis": "x",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : largeur de stance, écartement et niveau hanches/épaules — invisibles en down-the-line.",
+      "rationale_en": "Face-on: stance width, hip/shoulder level — invisible from down-the-line.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip",
+        "left_ankle",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_shoulder_separation",
+          "primitive": "rotation",
+          "mode": "separation",
+          "points": [
+            "left_shoulder",
+            "right_shoulder",
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip",
+        "left_ankle",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_shoulder_separation",
+          "primitive": "rotation",
+          "mode": "separation",
+          "points": [
+            "left_shoulder",
+            "right_shoulder",
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "rest"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 0.1,
+      "unit": "m/s"
+    },
+    "min_duration_s": 0.5,
+    "max_duration_s": 10
+  },
+  "outputs": [
+    "trunk_inclination",
+    "hip_hinge",
+    "knee_flexion",
+    "arm_hang",
+    "feet_separation",
+    "shoulder_level",
+    "hip_level",
+    "shoulder_rotation",
+    "hip_rotation",
+    "hip_shoulder_separation",
+    "head_stability"
+  ],
+  "report_highlights": [
+    "hip_hinge",
+    "trunk_inclination"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "club_type",
+      "label": "Type de club",
+      "type": "single_select",
+      "options": [
+        "driver",
+        "fer",
+        "wedge",
+        "putter"
+      ],
+      "required": false
+    },
+    {
+      "id": "stance_width",
+      "label": "Largeur de stance",
+      "type": "single_select",
+      "options": [
+        "étroite",
+        "normale",
+        "large"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "golf"
+  }
+}

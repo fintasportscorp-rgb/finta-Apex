@@ -1,0 +1,381 @@
+{
+  "id": "gymnastics_pirouette",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "gymnastics",
+  "gesture": "Pirouette (rotation verticale)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_shoulder",
+    "right_shoulder",
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "alignment_vertical",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "hip_center",
+        "shoulder_center"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "support_knee",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "free_leg_elevation",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_shoulder",
+        "left_hip",
+        "left_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "shoulder_tilt",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": false
+    },
+    {
+      "id": "trunk_rotation_overhead",
+      "primitive": "rotation",
+      "mode": "orientation",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "cog_stability_x",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : alignement vertical épaules-hanches-jambe d'appui (projection 2D).",
+      "rationale_en": "Reference view: vertical shoulder-hip-support leg alignment (2D projection).",
+      "feasibility_2d": "limited",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee"
+      ],
+      "measures": [
+        {
+          "id": "alignment_vertical",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "hip_center",
+            "shoulder_center"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "support_knee",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "free_leg_elevation",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_shoulder",
+            "left_hip",
+            "left_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": false
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "overhead",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Plongée : rotation absolue et stabilité du centre de gravité.",
+      "rationale_en": "Overhead: absolute rotation and center-of-gravity stability.",
+      "feasibility_2d": "limited",
+      "side": "both",
+      "required_visible": [
+        "hip_center",
+        "shoulder_center"
+      ],
+      "measures": [
+        {
+          "id": "trunk_rotation_overhead",
+          "primitive": "rotation",
+          "mode": "orientation",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "cog_stability_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "limited",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee"
+      ],
+      "measures": [
+        {
+          "id": "alignment_vertical",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "hip_center",
+            "shoulder_center"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "support_knee",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "free_leg_elevation",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_shoulder",
+            "left_hip",
+            "left_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": false
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:shoulder_tilt",
+      "op": "rises_above",
+      "threshold": 8
+    },
+    "end": {
+      "signal": "angle:shoulder_tilt",
+      "op": "falls_below",
+      "threshold": 5
+    },
+    "min_duration_s": 0.2,
+    "max_duration_s": 3
+  },
+  "outputs": [
+    "alignment_vertical",
+    "support_knee",
+    "free_leg_elevation",
+    "trunk_rotation_overhead",
+    "cog_stability_x",
+    "shoulder_rotation",
+    "hip_rotation"
+  ],
+  "report_highlights": [
+    "shoulder_rotation",
+    "hip_rotation"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "turn_count",
+      "label": "Nombre de tours",
+      "type": "single_select",
+      "options": [
+        "simple",
+        "double",
+        "triple"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

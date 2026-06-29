@@ -1,0 +1,267 @@
+{
+  "id": "rowing_drive_legs",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "rowing",
+  "gesture": "Poussée des jambes (drive)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "knee_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "knee_angle",
+      "expose": true
+    },
+    {
+      "id": "knee_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "knee_ang_speed",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : extension explosive genou + hanche en drive.",
+      "rationale_en": "Reference view: explosive knee + hip extension during drive.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "knee_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "knee_angle",
+          "expose": true
+        },
+        {
+          "id": "knee_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "knee_ang_speed",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : rotations épaule-hanche et symétrie bilatérale du mouvement.",
+      "rationale_en": "Face-on: shoulder-hip rotations and bilateral movement symmetry.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:knee_angle",
+      "op": "rises_above",
+      "threshold": 90
+    },
+    "end": {
+      "signal": "angle:knee_angle",
+      "op": "rises_above",
+      "threshold": 165
+    },
+    "min_duration_s": 0.2,
+    "max_duration_s": 1.5
+  },
+  "outputs": [
+    "knee_angle",
+    "hip_angle",
+    "trunk_inclination",
+    "knee_ang_speed",
+    "shoulder_rotation",
+    "hip_rotation",
+    "knee_ang_acceleration"
+  ],
+  "report_highlights": [
+    "knee_angle",
+    "knee_ang_speed"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "load",
+      "label": "Charge",
+      "type": "single_select",
+      "options": [
+        "léger",
+        "moyen",
+        "lourd"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

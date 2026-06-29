@@ -1,0 +1,343 @@
+{
+  "id": "archery_anchor",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "archery",
+  "gesture": "Ancrage (anchor)",
+  "description": "Ancrage en vue frontale : niveau des épaules, angle bras d'arc, alignement tronc. Usage : reproductibilité.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "right_hip",
+    "left_shoulder"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "draw_arm_elevation",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "draw_elbow",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": false
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "bow_arm_elevation_frontal",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "left_shoulder",
+        "left_elbow"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : position du coude tirant (haut) et stabilité statique à l'ancrage.",
+      "rationale_en": "Reference view: high draw-elbow position and static stability at anchor.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "right_hip",
+        "left_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "draw_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "draw_elbow",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": false
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Niveau d'épaules et écartement bras-tirant �\u001d utile pour la symétrie à l'ancrage.",
+      "rationale_en": "Shoulder level and draw-arm spread �\u001d useful for symmetry at anchor.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "right_elbow",
+        "left_elbow",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "bow_arm_elevation_frontal",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "left_shoulder",
+            "left_elbow"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "right_elbow",
+        "left_elbow",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "bow_arm_elevation_frontal",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "left_shoulder",
+            "left_elbow"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "rest"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 0.5,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 1.5,
+    "max_duration_s": 60
+  },
+  "outputs": [
+    "draw_arm_elevation",
+    "draw_elbow",
+    "trunk_lean",
+    "shoulder_level",
+    "bow_arm_elevation_frontal",
+    "shoulder_rotation"
+  ],
+  "report_highlights": [
+    "shoulder_level",
+    "bow_arm_elevation_frontal"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "laterality",
+      "label": "Côté dominant",
+      "type": "single_select",
+      "options": [
+        "droitier",
+        "gaucher"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

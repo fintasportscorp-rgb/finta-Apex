@@ -1,0 +1,357 @@
+{
+  "id": "badminton_split_step",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "badminton",
+  "gesture": "Split step (anticipation)",
+  "description": "Split step en vue frontale : symétrie des genoux fléchis, niveau des hanches. Usage : réactivité, équilibre dynamique.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "feet_separation",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_ankle",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "left_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "right_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_height",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "knee_angle_right",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": false
+    },
+    {
+      "id": "ankle_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_ankle",
+      "expose": false
+    },
+    {
+      "id": "ankle_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "ankle_speed",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : écartement des pieds, symétrie de la flexion, abaissement du centre de gravité.",
+      "rationale_en": "Reference view: foot spacing, flexion symmetry, lowered center of gravity.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "knee_angle_right",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": false
+        },
+        {
+          "id": "ankle_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_ankle",
+          "expose": false
+        },
+        {
+          "id": "ankle_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "ankle_speed",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "feet_separation",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_ankle",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "knee_angle_right",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": false
+        },
+        {
+          "id": "ankle_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_ankle",
+          "expose": false
+        },
+        {
+          "id": "ankle_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "ankle_speed",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:knee_angle_right",
+      "op": "falls_below",
+      "threshold": 150,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "speed:ankle_speed",
+      "op": "falls_below",
+      "threshold": 0.4,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 8
+  },
+  "phases": [
+    {
+      "id": "reception",
+      "until": {
+        "signal": "angle:knee_angle_right",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "rebond",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:knee_angle_right",
+    "event": "minimum"
+  },
+  "outputs": [
+    "feet_separation",
+    "left_knee_flexion",
+    "right_knee_flexion",
+    "hip_height",
+    "ankle_acceleration"
+  ],
+  "report_highlights": [
+    "right_knee_flexion",
+    "hip_height"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": [
+    {
+      "right": "right_knee_flexion",
+      "left": "left_knee_flexion"
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "badminton"
+  }
+}

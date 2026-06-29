@@ -1,0 +1,245 @@
+{
+  "id": "skiing_tuck",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "skiing",
+  "gesture": "Position d'Å“uf (tuck)",
+  "description": "Position aérodynamique en vue sagittale : inclinaison tronc, flexion hanche/genou/cheville. Usage : descente, aérodynamisme.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_wrist"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "arm_extension",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "right_wrist"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "ankle_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_ankle",
+      "expose": false
+    },
+    {
+      "id": "ankle_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "ankle_speed",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : position aéro statique (flexion genoux, inclinaison tronc, bras tendus).",
+      "rationale_en": "Reference view: static aero position (knee flexion, trunk lean, extended arms).",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_wrist"
+      ],
+      "measures": [
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "arm_extension",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "right_wrist"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "ankle_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_ankle",
+          "expose": false
+        },
+        {
+          "id": "ankle_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "ankle_speed",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "rest"
+    },
+    "end": {
+      "signal": "speed:ankle_speed",
+      "op": "rises_above",
+      "threshold": 0.4,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 1.5,
+    "max_duration_s": 60
+  },
+  "outputs": [
+    "knee_flexion",
+    "hip_flexion",
+    "trunk_inclination",
+    "arm_extension",
+    "ankle_acceleration"
+  ],
+  "report_highlights": [
+    "trunk_inclination",
+    "knee_flexion"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "condition",
+      "label": "Condition",
+      "type": "single_select",
+      "options": [
+        "simulation à sec",
+        "neige",
+        "vidéo"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

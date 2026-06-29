@@ -1,0 +1,247 @@
+{
+  "id": "swimming_flutter_kick",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "swimming",
+  "gesture": "Battement de jambes (flutter kick)",
+  "movement_type": "continuous",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_foot_index",
+    "right_heel"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 15%",
+  "measures": [
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "cadence",
+      "primitive": "cadence",
+      "mode": "cyclic",
+      "source_measure": "knee_angle",
+      "expose": true
+    },
+    {
+      "id": "ankle_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_knee",
+        "right_ankle",
+        "right_foot_index"
+      ],
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "ankle_position_y",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_ankle",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "ankle_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "ankle_angle",
+      "expose": true
+    },
+    {
+      "id": "ankle_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "ankle_ang_speed",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : amplitude verticale des battements, flexion plantaire.",
+      "rationale_en": "Reference view: vertical kick amplitude, ankle plantar flexion.",
+      "feasibility_2d": "limited",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_foot_index",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "cadence",
+          "primitive": "cadence",
+          "mode": "cyclic",
+          "source_measure": "knee_angle",
+          "expose": true
+        },
+        {
+          "id": "ankle_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_knee",
+            "right_ankle",
+            "right_foot_index"
+          ],
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "ankle_position_y",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_ankle",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "ankle_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "ankle_angle",
+          "expose": true
+        },
+        {
+          "id": "ankle_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "ankle_ang_speed",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "cyclic",
+    "cycle_signal": "knee_angle",
+    "boundary": "local_maxima",
+    "min_duration_s": 0.2,
+    "max_duration_s": 1.5
+  },
+  "outputs": [
+    "knee_angle",
+    "ankle_angle",
+    "ankle_position_y",
+    "ankle_ang_speed",
+    "ankle_ang_acceleration",
+    "foot_strike_angle",
+    "cadence"
+  ],
+  "report_highlights": [
+    "knee_angle",
+    "ankle_ang_speed"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "kick_rate",
+      "label": "Cadence battements",
+      "type": "single_select",
+      "options": [
+        "2 temps",
+        "4 temps",
+        "6 temps"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "pool_length",
+      "label": "Longueur bassin",
+      "type": "single_select",
+      "options": [
+        "25m",
+        "50m"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

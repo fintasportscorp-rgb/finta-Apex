@@ -1,0 +1,450 @@
+{
+  "id": "gymnastics_landing",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "gymnastics",
+  "gesture": "Réception (landing)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
+    "left_shoulder",
+    "right_shoulder"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "left_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "right_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_alignment_right",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_knee",
+      "reference": "right_ankle",
+      "expose": true
+    },
+    {
+      "id": "knee_alignment_left",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "left_knee",
+      "reference": "left_ankle",
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": false
+    },
+    {
+      "id": "hip_height",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : symétrie d'amortissement bilatéral, knee tracking — McNitt-Gray 1991.",
+      "rationale_en": "Reference view: bilateral symmetric amortization, knee tracking — McNitt-Gray 1991.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_alignment_right",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_knee",
+          "reference": "right_ankle",
+          "expose": true
+        },
+        {
+          "id": "knee_alignment_left",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "left_knee",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": false
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "sagittal_right",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Profil : amortissement vertical et inclinaison du tronc à la réception.",
+      "rationale_en": "Side view: vertical amortization and trunk lean on landing.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "hip_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_alignment_right",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_knee",
+          "reference": "right_ankle",
+          "expose": true
+        },
+        {
+          "id": "knee_alignment_left",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "left_knee",
+          "reference": "left_ankle",
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": false
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:knee_flexion",
+      "op": "falls_below",
+      "threshold": 170
+    },
+    "end": {
+      "signal": "rest",
+      "duration_s": 0.5
+    },
+    "min_duration_s": 0.1,
+    "max_duration_s": 1.5
+  },
+  "outputs": [
+    "left_knee_flexion",
+    "right_knee_flexion",
+    "knee_alignment_right",
+    "knee_alignment_left",
+    "shoulder_level",
+    "hip_height",
+    "trunk_inclination",
+    "shoulder_rotation",
+    "hip_rotation"
+  ],
+  "report_highlights": [
+    "right_knee_flexion",
+    "left_knee_flexion"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "landing_surface",
+      "label": "Surface de réception",
+      "type": "single_select",
+      "options": [
+        "tapis",
+        "sol",
+        "poutre"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": [
+    {
+      "right": "right_knee_flexion",
+      "left": "left_knee_flexion"
+    },
+    {
+      "right": "knee_alignment_right",
+      "left": "knee_alignment_left"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-06-15T19:24:02.878Z",
+  "version": "1.0",
+  "checks": [
+    {
+      "name": "circularDiff(1,359) ≈ 2°",
+      "result": 2
+    },
+    {
+      "name": "circularDiff(180,-180) = 0°",
+      "result": 0
+    },
+    {
+      "name": "toY_up({y:0.3}).yUp = 0.7",
+      "result": 0.7
+    },
+    {
+      "name": "adversarial_fixtures",
+      "result": [
+        {
+          "name": "torso_zero",
+          "description": "All landmarks at same position → no NaN, reliable=false",
+          "pass": true
+        },
+        {
+          "name": "trou_frames",
+          "description": "Timestamp gap > 3*33ms → speed unreliable at gap",
+          "pass": true
+        },
+        {
+          "name": "saut_360",
+          "description": "179°→-179° → displacement ≈ 2° (not 360°)",
+          "pass": true
+        },
+        {
+          "name": "confidence_zero",
+          "description": "Confidence=0 → reliable=false",
+          "pass": true
+        },
+        {
+          "name": "landmark_identique",
+          "description": "a==b in joint → |v|<ε → reliable=false, no NaN",
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

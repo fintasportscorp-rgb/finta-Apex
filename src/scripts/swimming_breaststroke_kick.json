@@ -1,0 +1,187 @@
+{
+  "id": "swimming_breaststroke_kick",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "swimming",
+  "gesture": "Coup de pied brasse (kick)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 15%",
+  "measures": [
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "knee_angle",
+      "expose": true
+    },
+    {
+      "id": "knee_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "knee_ang_speed",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence (bord de piscine) : amplitude genou et timing extension.",
+      "rationale_en": "Reference view (poolside): knee amplitude and extension timing.",
+      "feasibility_2d": "limited",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "knee_angle",
+          "expose": true
+        },
+        {
+          "id": "knee_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "knee_ang_speed",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:knee_angle",
+      "op": "falls_below",
+      "threshold": 120,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "angle:knee_angle",
+      "op": "rises_above",
+      "threshold": 160,
+      "unit": "deg"
+    },
+    "min_duration_s": 0.2,
+    "max_duration_s": 1.5
+  },
+  "phases": [
+    {
+      "id": "retour",
+      "until": {
+        "signal": "angle:knee_angle",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "propulsion",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:knee_angle",
+    "event": "minimum"
+  },
+  "outputs": [
+    "knee_angle",
+    "knee_ang_speed",
+    "knee_ang_acceleration"
+  ],
+  "report_highlights": [
+    "knee_angle",
+    "knee_ang_speed"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "stroke_rate",
+      "label": "Cadence (coups/min)",
+      "type": "number",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "pool_length",
+      "label": "Longueur bassin",
+      "type": "single_select",
+      "options": [
+        "25m",
+        "50m"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

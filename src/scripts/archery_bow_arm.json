@@ -1,0 +1,331 @@
+{
+  "id": "archery_bow_arm",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "archery",
+  "gesture": "Alignement bras d'arc",
+  "description": "Alignement statique du bras d'arc en vue frontale : hauteur, extension coude, épaule basse. Usage : reproductibilité balistique.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_shoulder",
+    "left_elbow",
+    "left_wrist",
+    "right_shoulder",
+    "right_hip"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "bow_arm_elevation",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "left_shoulder",
+        "left_elbow"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "bow_elbow",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_shoulder",
+        "left_elbow",
+        "left_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "shoulder_level",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "left_wrist",
+      "expose": false
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : hauteur du bras d'arc et niveau des épaules sont directement observables.",
+      "rationale_en": "Reference view: bow arm elevation and shoulder level are directly observable.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "left_elbow",
+        "left_wrist",
+        "right_shoulder",
+        "right_hip",
+        "left_hip"
+      ],
+      "measures": [
+        {
+          "id": "bow_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "left_shoulder",
+            "left_elbow"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "bow_elbow",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_shoulder",
+            "left_elbow",
+            "left_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "left_wrist",
+          "expose": false
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "left_elbow",
+        "left_wrist",
+        "right_shoulder",
+        "right_hip",
+        "left_hip"
+      ],
+      "measures": [
+        {
+          "id": "bow_arm_elevation",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "left_shoulder",
+            "left_elbow"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "bow_elbow",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_shoulder",
+            "left_elbow",
+            "left_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_level",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "left_wrist",
+          "expose": false
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "rest"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 0.4,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 1.5,
+    "max_duration_s": 60
+  },
+  "outputs": [
+    "bow_arm_elevation",
+    "bow_elbow",
+    "shoulder_level",
+    "trunk_lean",
+    "shoulder_rotation"
+  ],
+  "report_highlights": [
+    "bow_arm_elevation",
+    "shoulder_level"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "laterality",
+      "label": "Côté dominant",
+      "type": "single_select",
+      "options": [
+        "droitier",
+        "gaucher"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

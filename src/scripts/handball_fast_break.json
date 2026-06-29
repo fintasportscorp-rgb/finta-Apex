@@ -1,0 +1,233 @@
+{
+  "id": "handball_fast_break",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "handball",
+  "gesture": "Contre-attaque (fast break) — course",
+  "description": "Sprint balle en contre-attaque : propulsion hanche, cycle de jambes. Usage : vitesse de transition.",
+  "movement_type": "continuous",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_foot_index",
+    "right_heel"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": true
+    },
+    {
+      "id": "foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "foot_speed",
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : mécanique sprint, transport balle, inclinaison tronc.",
+      "rationale_en": "Reference view: sprint mechanics, ball carry, trunk lean.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_foot_index",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": true
+        },
+        {
+          "id": "foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "foot_speed",
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "cyclic",
+    "event": {
+      "signal": "speed:foot_speed",
+      "event": "peak"
+    }
+  },
+  "outputs": [
+    "knee_angle",
+    "hip_angle",
+    "trunk_inclination",
+    "foot_speed",
+    "foot_acceleration",
+    "foot_strike_angle"
+  ],
+  "report_highlights": [
+    "knee_angle",
+    "trunk_inclination"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "handball"
+  }
+}

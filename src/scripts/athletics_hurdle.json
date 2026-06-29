@@ -1,0 +1,281 @@
+{
+  "id": "athletics_hurdle",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "athletics",
+  "gesture": "Franchissement de haie",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "auto",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_foot_index",
+    "right_shoulder",
+    "left_hip",
+    "left_knee",
+    "left_ankle",
+    "right_heel"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 20%",
+  "measures": [
+    {
+      "id": "lead_leg",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trail_leg",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_fold",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "lead_foot_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_foot_index",
+      "expose": true
+    },
+    {
+      "id": "lead_foot_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "lead_foot_speed",
+      "expose": true
+    },
+    {
+      "id": "foot_strike_angle",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_heel",
+        "right_foot_index"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : extension lead leg, repli trail leg, inclinaison du tronc.",
+      "rationale_en": "Reference view: lead leg extension, trail leg fold, trunk lean.",
+      "feasibility_2d": "ok",
+      "side": "auto",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_foot_index",
+        "right_shoulder",
+        "left_hip",
+        "left_knee",
+        "left_ankle",
+        "right_heel"
+      ],
+      "measures": [
+        {
+          "id": "lead_leg",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trail_leg",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_fold",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "lead_foot_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_foot_index",
+          "expose": true
+        },
+        {
+          "id": "lead_foot_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "lead_foot_speed",
+          "expose": true
+        },
+        {
+          "id": "foot_strike_angle",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_heel",
+            "right_foot_index"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:right_foot_index",
+      "op": "rises_above",
+      "threshold": 0.8,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "rest",
+      "duration_s": 0.4
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 1.5
+  },
+  "phases": [
+    {
+      "id": "attaque",
+      "until": {
+        "signal": "angle:lead_leg",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "passage",
+      "until": {
+        "signal": "angle:trail_leg",
+        "event": "minimum"
+      }
+    },
+    {
+      "id": "reception",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:lead_leg",
+    "event": "minimum"
+  },
+  "outputs": [
+    "lead_leg",
+    "trail_leg",
+    "trunk_fold",
+    "lead_foot_speed",
+    "lead_foot_acceleration",
+    "foot_strike_angle"
+  ],
+  "report_highlights": [
+    "lead_leg",
+    "trunk_fold"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "hurdle_height",
+      "label": "Hauteur de haie",
+      "type": "single_select",
+      "options": [
+        "0.76m",
+        "0.84m",
+        "0.91m",
+        "1.00m",
+        "1.067m"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "distance",
+      "label": "Distance",
+      "type": "single_select",
+      "options": [
+        "60m",
+        "100m",
+        "110m",
+        "400m"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

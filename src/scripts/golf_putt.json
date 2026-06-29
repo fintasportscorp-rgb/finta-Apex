@@ -1,0 +1,464 @@
+{
+  "id": "golf_putt",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "golf",
+  "gesture": "Putt — pendule des épaules",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_shoulder",
+    "right_shoulder",
+    "left_hip",
+    "right_hip",
+    "nose"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "shoulder_tilt",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_stability",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "left_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "right_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    },
+    {
+      "id": "wrist_path_x",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_wrist",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_shoulder_separation",
+      "primitive": "rotation",
+      "mode": "separation",
+      "points": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "head_stability",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "nose",
+      "axis": "x",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : pendule des épaules et stabilité du tronc/hanches sont essentiellement frontaux.",
+      "rationale_en": "Reference view: shoulder pendulum and trunk/hip stability are essentially frontal.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_stability",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_shoulder_separation",
+          "primitive": "rotation",
+          "mode": "separation",
+          "points": [
+            "left_shoulder",
+            "right_shoulder",
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "sagittal_right",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Down-the-line : trajectoire du putter (path), posture statique de profil.",
+      "rationale_en": "Down-the-line: putter path and static side posture.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_wrist",
+        "right_hip",
+        "nose"
+      ],
+      "measures": [
+        {
+          "id": "wrist_path_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_wrist",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "head_stability",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "nose",
+          "axis": "x",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_stability",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_shoulder_separation",
+          "primitive": "rotation",
+          "mode": "separation",
+          "points": [
+            "left_shoulder",
+            "right_shoulder",
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:wrist_speed",
+      "op": "rises_above",
+      "threshold": 0.1,
+      "unit": "m/s"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "falls_below",
+      "threshold": 0.05,
+      "unit": "m/s"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 3
+  },
+  "outputs": [
+    "shoulder_tilt",
+    "hip_stability",
+    "left_knee_flexion",
+    "right_knee_flexion",
+    "wrist_speed",
+    "wrist_path_x",
+    "trunk_inclination",
+    "shoulder_rotation",
+    "hip_rotation",
+    "hip_shoulder_separation",
+    "head_stability"
+  ],
+  "report_highlights": [
+    "shoulder_tilt",
+    "wrist_speed"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "putt_distance",
+      "label": "Distance du putt",
+      "type": "single_select",
+      "options": [
+        "courte",
+        "moyenne",
+        "longue"
+      ],
+      "required": false
+    },
+    {
+      "id": "green_slope",
+      "label": "Inclinaison du green",
+      "type": "single_select",
+      "options": [
+        "plat",
+        "pente"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "golf"
+  }
+}

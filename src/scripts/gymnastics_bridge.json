@@ -1,0 +1,187 @@
+{
+  "id": "gymnastics_bridge",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "gymnastics",
+  "gesture": "Pont (bridge)",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_wrist"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "trunk_extension",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "hip_position_y",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "shoulder_alignment",
+      "primitive": "position",
+      "mode": "distance",
+      "point": "right_shoulder",
+      "reference": "right_wrist",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : extension complète du tronc, alignement épaule-main, hauteur du bassin.",
+      "rationale_en": "Reference view: full trunk extension, shoulder-hand alignment, hip height.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_wrist"
+      ],
+      "measures": [
+        {
+          "id": "trunk_extension",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "hip_position_y",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "shoulder_alignment",
+          "primitive": "position",
+          "mode": "distance",
+          "point": "right_shoulder",
+          "reference": "right_wrist",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "rest"
+    },
+    "end": {
+      "signal": "rest",
+      "duration_s": 2
+    },
+    "min_duration_s": 1,
+    "max_duration_s": 20
+  },
+  "outputs": [
+    "trunk_extension",
+    "hip_position_y",
+    "knee_flexion",
+    "shoulder_alignment"
+  ],
+  "report_highlights": [
+    "trunk_extension",
+    "knee_flexion"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "bridge_type",
+      "label": "Type de pont",
+      "type": "single_select",
+      "options": [
+        "statique",
+        "dynamique"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

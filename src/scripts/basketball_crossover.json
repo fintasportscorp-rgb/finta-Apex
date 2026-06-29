@@ -1,0 +1,340 @@
+{
+  "id": "basketball_crossover",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "basketball",
+  "gesture": "Crossover dribble",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "left_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "right_knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_tilt",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_position_x",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "shoulder_tilt_post",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_shoulder",
+        "left_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_tilt_post",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "left_hip"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : déport latéral, hip tilt, flexion genou pivot.",
+      "rationale_en": "Reference view: lateral shift, hip tilt, pivot knee flexion.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle",
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "left_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "right_knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_tilt",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_position_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Vue arrière : alignement de la colonne et trajet des pieds.",
+      "rationale_en": "Rear view: spine alignment and foot path.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_tilt_post",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_shoulder",
+            "left_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_tilt_post",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "left_hip"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:hip_tilt",
+      "op": "rises_above",
+      "threshold": 8,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "angle:hip_tilt",
+      "op": "falls_below",
+      "threshold": 3,
+      "unit": "deg"
+    },
+    "min_duration_s": 0.2,
+    "max_duration_s": 1.5
+  },
+  "outputs": [
+    "left_knee_flexion",
+    "right_knee_flexion",
+    "hip_tilt",
+    "hip_position_x",
+    "shoulder_tilt_post",
+    "hip_tilt_post",
+    "shoulder_rotation",
+    "hip_rotation"
+  ],
+  "report_highlights": [
+    "hip_tilt",
+    "right_knee_flexion"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "crossover_speed",
+      "label": "Vitesse d'exécution",
+      "type": "single_select",
+      "options": [
+        "lente",
+        "rapide"
+      ],
+      "required": false
+    },
+    {
+      "id": "dribble_hand",
+      "label": "Main de dribble initiale",
+      "type": "single_select",
+      "options": [
+        "right",
+        "left"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "basketball"
+  }
+}

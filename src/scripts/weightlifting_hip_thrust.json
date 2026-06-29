@@ -1,0 +1,207 @@
+{
+  "id": "weightlifting_hip_thrust",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "weightlifting",
+  "gesture": "Hip thrust",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "both",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "hip_extension",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_alignment",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "horizontal",
+      "expose": true
+    },
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": false
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : extension complète hanche, ligne épaule-hanche-genou au sommet.",
+      "rationale_en": "Reference view: full hip extension, shoulder-hip-knee line at top.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "hip_extension",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_alignment",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "horizontal",
+          "expose": true
+        },
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": false
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:hip_angle",
+      "op": "falls_below",
+      "threshold": 140,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "angle:hip_angle",
+      "op": "rises_above",
+      "threshold": 170,
+      "unit": "deg"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 5
+  },
+  "outputs": [
+    "hip_extension",
+    "knee_angle",
+    "trunk_alignment"
+  ],
+  "report_highlights": [
+    "hip_extension",
+    "knee_angle"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "load_kg",
+      "label": "Charge (kg)",
+      "type": "number",
+      "required": false
+    },
+    {
+      "id": "foot_position",
+      "label": "Position des pieds",
+      "type": "single_select",
+      "options": [
+        "pieds proches",
+        "pieds éloignés"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

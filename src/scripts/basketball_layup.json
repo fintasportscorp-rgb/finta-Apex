@@ -1,0 +1,234 @@
+{
+  "id": "basketball_layup",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "basketball",
+  "gesture": "Lay-up — appel un pied",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "auto",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "left_hip",
+    "left_knee",
+    "left_ankle"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "takeoff_knee",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "swing_knee",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "elbow_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    },
+    {
+      "id": "jump_height",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "hip_center",
+      "axis": "y",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : appel, swing leg, release du bras tireur.",
+      "rationale_en": "Reference view: takeoff, swing leg, shooting arm release.",
+      "feasibility_2d": "ok",
+      "side": "auto",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "left_hip",
+        "left_knee",
+        "left_ankle"
+      ],
+      "measures": [
+        {
+          "id": "takeoff_knee",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "swing_knee",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "left_hip",
+            "left_knee",
+            "left_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "elbow_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        },
+        {
+          "id": "jump_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "hip_center",
+          "axis": "y",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:takeoff_knee",
+      "op": "falls_below",
+      "threshold": 150,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "speed:wrist_speed",
+      "op": "falls_below",
+      "threshold": 0.3,
+      "unit": "m/s"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 2
+  },
+  "outputs": [
+    "takeoff_knee",
+    "swing_knee",
+    "elbow_angle",
+    "wrist_speed",
+    "jump_height"
+  ],
+  "report_highlights": [
+    "takeoff_knee",
+    "elbow_angle"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "takeoff_foot",
+      "label": "Pied d'appel",
+      "type": "single_select",
+      "options": [
+        "right",
+        "left"
+      ],
+      "required": false
+    },
+    {
+      "id": "target_side",
+      "label": "Côté du panier",
+      "type": "single_select",
+      "options": [
+        "gauche",
+        "droit"
+      ],
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "basketball"
+  }
+}
