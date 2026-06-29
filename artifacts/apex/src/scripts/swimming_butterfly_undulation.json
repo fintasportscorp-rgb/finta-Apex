@@ -1,0 +1,217 @@
+{
+  "id": "swimming_butterfly_undulation",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "swimming",
+  "gesture": "Ondulation papillon (dolphin kick)",
+  "movement_type": "continuous",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_hip",
+    "right_knee",
+    "right_ankle",
+    "right_shoulder"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 15%",
+  "measures": [
+    {
+      "id": "hip_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee"
+      ],
+      "expose": true
+    },
+    {
+      "id": "cadence",
+      "primitive": "cadence",
+      "mode": "cyclic",
+      "source_measure": "hip_angle",
+      "expose": true
+    },
+    {
+      "id": "knee_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "trunk_position_y",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "shoulder_center",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "hip_ang_speed",
+      "primitive": "speed",
+      "mode": "angular",
+      "source_measure": "hip_angle",
+      "expose": true
+    },
+    {
+      "id": "hip_ang_acceleration",
+      "primitive": "acceleration",
+      "mode": "angular",
+      "source_measure": "hip_ang_speed",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : amplitude de l'ondulation, flexion-extension hanche-genou.",
+      "rationale_en": "Reference view: undulation amplitude, hip-knee flexion-extension.",
+      "feasibility_2d": "limited",
+      "side": "right",
+      "required_visible": [
+        "right_hip",
+        "right_knee",
+        "right_ankle",
+        "right_shoulder"
+      ],
+      "measures": [
+        {
+          "id": "hip_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_hip",
+            "right_knee"
+          ],
+          "expose": true
+        },
+        {
+          "id": "cadence",
+          "primitive": "cadence",
+          "mode": "cyclic",
+          "source_measure": "hip_angle",
+          "expose": true
+        },
+        {
+          "id": "knee_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "trunk_position_y",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "shoulder_center",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "hip_ang_speed",
+          "primitive": "speed",
+          "mode": "angular",
+          "source_measure": "hip_angle",
+          "expose": true
+        },
+        {
+          "id": "hip_ang_acceleration",
+          "primitive": "acceleration",
+          "mode": "angular",
+          "source_measure": "hip_ang_speed",
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "cyclic",
+    "cycle_signal": "hip_angle",
+    "boundary": "local_maxima",
+    "min_duration_s": 0.3,
+    "max_duration_s": 2
+  },
+  "outputs": [
+    "hip_angle",
+    "knee_angle",
+    "trunk_position_y",
+    "hip_ang_speed",
+    "hip_ang_acceleration",
+    "cadence"
+  ],
+  "report_highlights": [
+    "hip_angle",
+    "hip_ang_speed"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "stroke_rate",
+      "label": "Cadence (coups/min)",
+      "type": "number",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "pool_length",
+      "label": "Longueur bassin",
+      "type": "single_select",
+      "options": [
+        "25m",
+        "50m"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "symmetry_pairs": []
+}

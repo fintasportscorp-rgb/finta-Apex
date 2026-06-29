@@ -1,6 +1,6 @@
-# [Project name]
+# Apex — Analyse de geste sportif
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Real-time in-browser biomechanical gesture analysis app: captures motion via webcam, analyzes joint angles and movements, and generates reports — fully offline, no server, no account needed.
 
 ## Run & Operate
 
@@ -22,15 +22,29 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/apex/` — the main React + Vite app (frontend only, no backend needed)
+- `artifacts/apex/src/engine/` — core biomechanics engine (pose estimation, filters, interpreters)
+- `artifacts/apex/src/components/` — UI: catalogue, capture, report, builder, landing, shared
+- `artifacts/apex/src/lib/` — i18n (fr/en), scripts catalog, export/import, utilities
+- `artifacts/apex/public/` — static assets: fonts, logos, ONNX models, guide images
+- `artifacts/apex/src/components/shared/DesignTokens.css` — app design system (Aurora glassmorphic theme)
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- **Fully client-side / offline-first**: ONNX Runtime Web + MediaPipe run in-browser; no server calls needed
+- **COOP/COEP headers required**: Cross-Origin-Opener-Policy + Cross-Origin-Embedder-Policy must be set for SharedArrayBuffer (ONNX multi-threaded inference)
+- **Two entry points consolidated**: Original had `index.html` (landing) and `app.html` (app); migrated to single `index.html` → `app-main.tsx` entry
+- **react-router-dom v6**: App uses v6 API (BrowserRouter, Routes, Route); pinned to `^6.28.0` to avoid v7 breaking changes
+- **Lang-prefixed routes**: All app routes are under `/:lang/(fr|en)/...`; vite config SPA fallback rewrites these to index.html
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Sport catalogue: browse 20+ sports with built-in gesture scripts
+- Capture screen: real-time pose estimation via webcam, records gesture sequences
+- Report view: biomechanical analysis with angles, rotations, speeds, and comparison to reference model
+- Builder: create custom gesture analysis scripts
+- Landing page: public-facing marketing page
+- Bilingual (French / English)
 
 ## User preferences
 

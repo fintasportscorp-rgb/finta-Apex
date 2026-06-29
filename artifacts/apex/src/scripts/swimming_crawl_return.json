@@ -1,0 +1,214 @@
+{
+  "id": "swimming_crawl_return",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "swimming",
+  "gesture": "Retour aérien crawl",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "right_hip"
+  ],
+  "height": "full",
+  "distance_rule": "corps entier + 15%",
+  "measures": [
+    {
+      "id": "elbow_height",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_elbow",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "elbow_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "wrist_path_y",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_wrist",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "shoulder_angle",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_shoulder",
+        "right_elbow"
+      ],
+      "expose": false
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : coude haut en récupération, trajet poignet relâché.",
+      "rationale_en": "Reference view: high elbow recovery, relaxed wrist path.",
+      "feasibility_2d": "limited",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "elbow_height",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_elbow",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "elbow_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_path_y",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_wrist",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "shoulder_angle",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_shoulder",
+            "right_elbow"
+          ],
+          "expose": false
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "angle:shoulder_angle",
+      "op": "rises_above",
+      "threshold": 100,
+      "unit": "deg"
+    },
+    "end": {
+      "signal": "angle:shoulder_angle",
+      "op": "falls_below",
+      "threshold": 30,
+      "unit": "deg"
+    },
+    "min_duration_s": 0.3,
+    "max_duration_s": 1.5
+  },
+  "phases": [
+    {
+      "id": "sortie_eau",
+      "until": {
+        "signal": "angle:shoulder_angle",
+        "event": "rises_to_max"
+      }
+    },
+    {
+      "id": "retour_aerien",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:shoulder_angle",
+    "event": "rises_to_max"
+  },
+  "outputs": [
+    "elbow_height",
+    "elbow_angle",
+    "wrist_path_y"
+  ],
+  "report_highlights": [
+    "elbow_angle",
+    "elbow_height"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "stroke_rate",
+      "label": "Cadence (coups/min)",
+      "type": "number",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "pool_length",
+      "label": "Longueur bassin",
+      "type": "single_select",
+      "options": [
+        "25m",
+        "50m"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

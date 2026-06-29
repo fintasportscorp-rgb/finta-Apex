@@ -1,0 +1,381 @@
+{
+  "id": "boxing_slip",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "boxing",
+  "gesture": "Esquive de profil (slip)",
+  "description": "Slip en vue sagittale : inclinaison tronc avant, flexion hanches/genoux. Usage : esquive directe.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "sagittal_right",
+  "side": "right",
+  "required_visible": [
+    "right_shoulder",
+    "right_hip",
+    "right_knee",
+    "right_ankle"
+  ],
+  "height": "full",
+  "measures": [
+    {
+      "id": "trunk_lean",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    },
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "head_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "nose",
+      "expose": true
+    },
+    {
+      "id": "head_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "head_speed",
+      "expose": true
+    },
+    {
+      "id": "hip_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_hip",
+      "expose": false
+    },
+    {
+      "id": "hip_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "hip_speed",
+      "expose": true
+    },
+    {
+      "id": "head_position_x",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "nose",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "shoulder_center_x",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "shoulder_center",
+      "axis": "x",
+      "expose": true
+    },
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "sagittal_right",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : déport latéral du tronc et flexion du genou.",
+      "rationale_en": "Reference view: lateral trunk shift and knee flexion.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "measures": [
+        {
+          "id": "trunk_lean",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        },
+        {
+          "id": "head_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "nose",
+          "expose": true
+        },
+        {
+          "id": "head_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "head_speed",
+          "expose": true
+        },
+        {
+          "id": "hip_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_hip",
+          "expose": false
+        },
+        {
+          "id": "hip_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "hip_speed",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "frontal",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Face-on : amplitude latérale du déport tête/tronc.",
+      "rationale_en": "Face-on: lateral amplitude of head/trunk shift.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "head_position_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "nose",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_center_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "shoulder_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : mêmes mesures bilatérales que la vue frontale, capturées depuis le dos.",
+      "rationale_en": "Rear view: same bilateral measures as the frontal view, captured from behind.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "head_position_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "nose",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_center_x",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "shoulder_center",
+          "axis": "x",
+          "expose": true
+        },
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:hip_speed",
+      "op": "rises_above",
+      "threshold": 0.4,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "speed:hip_speed",
+      "op": "falls_below",
+      "threshold": 0.15,
+      "unit": "TL/s"
+    },
+    "min_duration_s": 0.1,
+    "max_duration_s": 1.5
+  },
+  "phases": [
+    {
+      "id": "esquive",
+      "until": {
+        "signal": "angle:trunk_lean",
+        "event": "maximum"
+      }
+    },
+    {
+      "id": "retour",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "angle:trunk_lean",
+    "event": "maximum"
+  },
+  "outputs": [
+    "trunk_lean",
+    "knee_flexion",
+    "head_speed",
+    "head_position_x",
+    "shoulder_center_x",
+    "shoulder_rotation",
+    "hip_rotation",
+    "head_acceleration",
+    "hip_acceleration"
+  ],
+  "report_highlights": [
+    "trunk_lean",
+    "knee_flexion"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "session_type",
+      "label": "Type de séance",
+      "type": "single_select",
+      "options": [
+        "bilan initial",
+        "suivi",
+        "entraînement",
+        "compétition"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ]
+}

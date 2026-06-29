@@ -1,0 +1,463 @@
+{
+  "id": "tennis_forehand",
+  "version": "1.1.0",
+  "dsl_version": "1.1",
+  "discipline": "tennis",
+  "gesture": "Coup droit — plan de frappe",
+  "description": "Plan de frappe au coup droit : alignement épaule-bras-raquette au moment de l'impact, ouverture du bassin et rotation du tronc.",
+  "movement_type": "finite",
+  "cv_model": "blazepose-full@1.x",
+  "view": "frontal",
+  "side": "both",
+  "required_visible": [
+    "left_shoulder",
+    "right_shoulder",
+    "right_elbow",
+    "right_wrist",
+    "left_hip",
+    "right_hip"
+  ],
+  "height": "hip",
+  "distance_rule": "corps entier + 30%",
+  "measures": [
+    {
+      "id": "shoulder_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_shoulder",
+        "right_shoulder"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hip_rotation",
+      "primitive": "rotation",
+      "mode": "orientation_folded",
+      "points": [
+        "left_hip",
+        "right_hip"
+      ],
+      "expose": true
+    },
+    {
+      "id": "hitting_plane",
+      "primitive": "hitting_plane",
+      "mode": "right",
+      "points": [
+        "right_hip",
+        "left_hip",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "wrist_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_wrist",
+      "expose": true
+    },
+    {
+      "id": "elbow_speed",
+      "primitive": "speed",
+      "mode": "linear",
+      "point": "right_elbow",
+      "expose": true
+    },
+    {
+      "id": "elbow_acceleration",
+      "primitive": "acceleration",
+      "mode": "linear",
+      "source_measure": "elbow_speed",
+      "expose": true
+    },
+    {
+      "id": "knee_flexion",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_hip",
+        "right_knee",
+        "right_ankle"
+      ],
+      "expose": true
+    },
+    {
+      "id": "elbow_extension",
+      "primitive": "angle",
+      "mode": "joint",
+      "points": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist"
+      ],
+      "expose": true
+    },
+    {
+      "id": "wrist_path_y",
+      "primitive": "position",
+      "mode": "amplitude",
+      "point": "right_wrist",
+      "axis": "y",
+      "expose": true
+    },
+    {
+      "id": "trunk_inclination",
+      "primitive": "angle",
+      "mode": "segment_axis",
+      "points": [
+        "right_hip",
+        "right_shoulder"
+      ],
+      "axis": "vertical",
+      "expose": true
+    }
+  ],
+  "available_views": [
+    {
+      "view": "frontal",
+      "priority": 1,
+      "primary": true,
+      "rationale_fr": "Vue de référence : alignement épaules/hanches, plan de frappe et timing d'impact en projection frontale.",
+      "rationale_en": "Reference view: shoulder/hip alignment, strike plane and impact timing in frontal projection.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hitting_plane",
+          "primitive": "hitting_plane",
+          "mode": "right",
+          "points": [
+            "right_hip",
+            "left_hip",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        },
+        {
+          "id": "elbow_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_elbow",
+          "expose": true
+        },
+        {
+          "id": "elbow_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "elbow_speed",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "sagittal_right",
+      "priority": 2,
+      "primary": false,
+      "rationale_fr": "Profil : trajectoire low-to-high du poignet et extension du coude à l'impact.",
+      "rationale_en": "Side view: wrist low-to-high path and elbow extension at impact.",
+      "feasibility_2d": "ok",
+      "side": "right",
+      "required_visible": [
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "elbow_extension",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_shoulder",
+            "right_elbow",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_path_y",
+          "primitive": "position",
+          "mode": "amplitude",
+          "point": "right_wrist",
+          "axis": "y",
+          "expose": true
+        },
+        {
+          "id": "trunk_inclination",
+          "primitive": "angle",
+          "mode": "segment_axis",
+          "points": [
+            "right_hip",
+            "right_shoulder"
+          ],
+          "axis": "vertical",
+          "expose": true
+        }
+      ]
+    },
+    {
+      "view": "posterior",
+      "priority": 3,
+      "primary": false,
+      "rationale_fr": "Vue arrière : rotations épaules/hanches et plan de frappe depuis le dos — mesures bilatérales identiques à la vue frontale.",
+      "rationale_en": "Rear view: shoulder/hip rotations and strike plane from behind — bilateral measures identical to frontal view.",
+      "feasibility_2d": "ok",
+      "side": "both",
+      "required_visible": [
+        "left_shoulder",
+        "right_shoulder",
+        "right_elbow",
+        "right_wrist",
+        "left_hip",
+        "right_hip"
+      ],
+      "measures": [
+        {
+          "id": "shoulder_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_shoulder",
+            "right_shoulder"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hip_rotation",
+          "primitive": "rotation",
+          "mode": "orientation_folded",
+          "points": [
+            "left_hip",
+            "right_hip"
+          ],
+          "expose": true
+        },
+        {
+          "id": "hitting_plane",
+          "primitive": "hitting_plane",
+          "mode": "right",
+          "points": [
+            "right_hip",
+            "left_hip",
+            "right_wrist"
+          ],
+          "expose": true
+        },
+        {
+          "id": "wrist_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_wrist",
+          "expose": true
+        },
+        {
+          "id": "elbow_speed",
+          "primitive": "speed",
+          "mode": "linear",
+          "point": "right_elbow",
+          "expose": true
+        },
+        {
+          "id": "elbow_acceleration",
+          "primitive": "acceleration",
+          "mode": "linear",
+          "source_measure": "elbow_speed",
+          "expose": true
+        },
+        {
+          "id": "knee_flexion",
+          "primitive": "angle",
+          "mode": "joint",
+          "points": [
+            "right_hip",
+            "right_knee",
+            "right_ankle"
+          ],
+          "expose": true
+        }
+      ]
+    }
+  ],
+  "segmentation": {
+    "mode": "discrete",
+    "start": {
+      "signal": "speed:right_wrist",
+      "op": "rises_above",
+      "threshold": 0.5,
+      "unit": "TL/s"
+    },
+    "end": {
+      "signal": "rest",
+      "duration_s": 0.4
+    },
+    "min_duration_s": 0.25,
+    "max_duration_s": 2.5
+  },
+  "phases": [
+    {
+      "id": "preparation",
+      "until": {
+        "signal": "speed:right_wrist",
+        "event": "rises_to_max"
+      }
+    },
+    {
+      "id": "impact",
+      "until": {
+        "signal": "speed:right_wrist",
+        "event": "peak"
+      }
+    },
+    {
+      "id": "follow_through",
+      "until": "end"
+    }
+  ],
+  "key_event": {
+    "signal": "speed:right_wrist",
+    "event": "peak"
+  },
+  "outputs": [
+    "shoulder_rotation",
+    "hip_rotation",
+    "hitting_plane",
+    "wrist_speed",
+    "elbow_speed",
+    "knee_flexion",
+    "elbow_extension",
+    "wrist_path_y",
+    "trunk_inclination",
+    "elbow_acceleration"
+  ],
+  "report_highlights": [
+    "hitting_plane",
+    "wrist_speed"
+  ],
+  "inputs": [
+    {
+      "id": "readiness_physical",
+      "label": "Fraîcheur physique",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "readiness_cognitive",
+      "label": "Acuité mentale",
+      "type": "rpe_readiness",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "surface",
+      "label": "Surface",
+      "type": "single_select",
+      "options": [
+        "dur",
+        "terre battue",
+        "gazon",
+        "synthétique"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "spin",
+      "label": "Effet",
+      "type": "single_select",
+      "options": [
+        "plat",
+        "lifté",
+        "slicé"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "court_zone",
+      "label": "Zone de frappe",
+      "type": "single_select",
+      "options": [
+        "fond de court",
+        "mi-court",
+        "montée au filet"
+      ],
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_physical",
+      "label": "Effort physique (RPE-P)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "rpe_cognitive",
+      "label": "Effort mental (RPE-C)",
+      "type": "rpe",
+      "scope": "sequence",
+      "required": false
+    },
+    {
+      "id": "note",
+      "label": "Note",
+      "type": "textarea",
+      "scope": "sequence",
+      "required": false
+    }
+  ],
+  "ball_tracking": {
+    "enabled": true,
+    "sport_preset": "tennis"
+  }
+}
