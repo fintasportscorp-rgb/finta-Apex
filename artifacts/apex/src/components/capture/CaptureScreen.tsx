@@ -7,6 +7,7 @@ import type { Script, ViewType } from '../../lib/scripts'
 import type { PoseFrame, RawLandmark } from '../../engine/types'
 import { interpretFrames } from '../../engine/interpreter/interpreter'
 import { MediaPipeProvider } from '../../engine/provider/MediaPipeProvider'
+import type { FacingMode } from '../../engine/provider/MediaPipeProvider'
 import type { MeasureResult } from '../../engine/types'
 import { SkeletonOverlay } from './SkeletonOverlay'
 import { BallOverlay } from './BallOverlay'
@@ -115,6 +116,10 @@ export function CaptureScreen() {
   const [liveMeasures, setLiveMeasures] = useState<MeasureResult[]>([])
   const [cameraError, setCameraError] = useState<string | null>(null)
   const [mpReady, setMpReady] = useState(false)
+  const providerRef = useRef<MediaPipeProvider | null>(null)
+  const [facingMode, setFacingMode] = useState<FacingMode>('user')
+  const [hasMultipleCameras, setHasMultipleCameras] = useState(false)
+  const [isSwitchingCamera, setIsSwitchingCamera] = useState(false)
 
   // Ball tracker (optional — only when the script enables it)
   const ballTrackerRef = useRef<HybridBallTracker | null>(null)
@@ -236,9 +241,10 @@ export function CaptureScreen() {
     let cancelled = false
 
     const provider = new MediaPipeProvider({
-      mirrorX: true,
+      facingMode: 'user',
       videoEl: videoRef.current ?? undefined,
     })
+    providerRef.current = provider
 
     provider.onFrame(frame => {
       if (cancelled) return
@@ -297,19 +303,42 @@ export function CaptureScreen() {
     })
 
     provider.start().then(() => {
-      if (!cancelled) setMpReady(true)
+      if (cancelled) return
+      setMpReady(true)
+      setFacingMode(provider.getFacingMode())
+      navigator.mediaDevices?.enumerateDevices?.().then(devices => {
+        if (cancelled) return
+        const videoInputs = devices.filter(d => d.kind === 'videoinput')
+        setHasMultipleCameras(videoInputs.length > 1)
+      }).catch(() => {})
     }).catch(err => {
       if (!cancelled) setCameraError(err instanceof Error ? err.message : String(err))
     })
 
     return () => {
       cancelled = true
+      providerRef.current = null
       provider.stop()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [script?.id])
 
   // ── Handlers ──────────────────────────────────────────────────────────────
+
+  const handleFlipCamera = async () => {
+    const provider = providerRef.current
+    if (!provider || isSwitchingCamera) return
+    const next: FacingMode = facingMode === 'user' ? 'environment' : 'user'
+    setIsSwitchingCamera(true)
+    try {
+      await provider.switchCamera(next)
+      setFacingMode(next)
+    } catch (err) {
+      setCameraError(err instanceof Error ? err.message : String(err))
+    } finally {
+      setIsSwitchingCamera(false)
+    }
+  }
 
   const handleRecord = () => {
     instanceFramesRef.current = []
@@ -697,9 +726,38 @@ export function CaptureScreen() {
             style={{
               position: 'absolute', inset: 0,
               width: '100%', height: '100%',
-              objectFit: 'cover', transform: 'scaleX(-1)',
+              objectFit: 'cover', transform: facingMode === 'user' ? 'scaleX(-1)' : 'none',
             }}
           />
+
+          {!cameraError && hasMultipleCameras && (
+            <button
+              onClick={handleFlipCamera}
+              disabled={isSwitchingCamera}
+              title={lang === 'fr' ? 'Changer de caméra' : 'Switch camera'}
+              aria-label={lang === 'fr' ? 'Changer de caméra' : 'Switch camera'}
+              style={{
+                position: 'absolute',
+                top: 14, right: 14,
+                zIndex: 2,
+                width: 36, height: 36,
+                borderRadius: '50%',
+                background: 'rgba(2,13,14,0.55)',
+                border: '1px solid rgba(255,255,255,0.30)',
+                color: '#fff',
+                cursor: isSwitchingCamera ? 'default' : 'pointer',
+                opacity: isSwitchingCamera ? 0.5 : 1,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                transition: 'all var(--dur-fast) var(--ease-out)',
+              }}
+            >
+              <FlipCameraIcon />
+            </button>
+          )}
 
           {/* Corner brackets — instrument-panel feel */}
           {[
@@ -885,6 +943,17 @@ function UpArrowIcon() {
       <path d="M10 14 L10 4" />
       <path d="M6 8 L10 4 L14 8" />
       <path d="M4 17 L16 17" />
+    </svg>
+  )
+}
+
+function FlipCameraIcon() {
+  return (
+    <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M17 3L21 7L17 11" />
+      <path d="M21 7H8a4 4 0 0 0-4 4v1" />
+      <path d="M7 21L3 17L7 13" />
+      <path d="M3 17H16a4 4 0 0 0 4-4v-1" />
     </svg>
   )
 }

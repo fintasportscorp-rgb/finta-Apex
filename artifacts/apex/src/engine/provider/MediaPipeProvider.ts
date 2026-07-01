@@ -11,10 +11,12 @@ const CONFIDENCE_THRESHOLD = 0.5
 const PRESENCE_THRESHOLD = 0.5
 // LITE_FALLBACK_FPS = 20 — kept for reference; auto-downgrade removed
 
+export type FacingMode = 'user' | 'environment'
+
 export interface MediaPipeConfig {
   modelPath?: string
   numPoses?: number
-  mirrorX?: boolean
+  facingMode?: FacingMode      // 'user' = front/selfie camera, 'environment' = rear camera
   videoEl?: HTMLVideoElement   // caller-owned element for display + detection
 }
 
@@ -22,7 +24,7 @@ export interface MediaPipeConfig {
 type AnyModule = any
 
 export class MediaPipeProvider implements CameraProvider {
-  private cfg: Required<Omit<MediaPipeConfig, 'videoEl'>> & { videoEl?: HTMLVideoElement }
+  private cfg: Required<Omit<MediaPipeConfig, 'videoEl' | 'facingMode'>> & { videoEl?: HTMLVideoElement }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private landmarker: AnyModule = null
   private stream: MediaStream | null = null
@@ -33,14 +35,19 @@ export class MediaPipeProvider implements CameraProvider {
   private lastFrameTime = 0
   private fpsWindow: number[] = []
   private stopped = false
+  private facingMode: FacingMode
 
   constructor(config: MediaPipeConfig = {}) {
     this.cfg = {
       modelPath: config.modelPath ?? MODEL_PATH,
       numPoses: config.numPoses ?? 2,
-      mirrorX: config.mirrorX ?? true,
       videoEl: config.videoEl,
     }
+    this.facingMode = config.facingMode ?? 'user'
+  }
+
+  getFacingMode(): FacingMode {
+    return this.facingMode
   }
 
   onFrame(cb: (frame: PoseFrame) => void): void {
@@ -52,7 +59,7 @@ export class MediaPipeProvider implements CameraProvider {
     if (this.stopped) return
 
     this.stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'user', width: 640, height: 480 },
+      video: { facingMode: { ideal: this.facingMode }, width: 640, height: 480 },
     })
     if (this.stopped) {
       this.stream.getTracks().forEach(t => t.stop())
@@ -66,6 +73,30 @@ export class MediaPipeProvider implements CameraProvider {
     if (this.stopped) return
 
     this.processLoop(video)
+  }
+
+  // Switches between front/back camera without reloading the pose model —
+  // just swaps the underlying MediaStream on the same <video> element.
+  async switchCamera(mode: FacingMode): Promise<void> {
+    if (this.stopped || mode === this.facingMode) return
+
+    const newStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: mode }, width: 640, height: 480 },
+    })
+    if (this.stopped) {
+      newStream.getTracks().forEach(t => t.stop())
+      return
+    }
+
+    this.stream?.getTracks().forEach(t => t.stop())
+    this.stream = newStream
+    this.facingMode = mode
+
+    const video = this.cfg.videoEl ?? this.ownedVideoEl
+    if (video) {
+      video.srcObject = newStream
+      await video.play()
+    }
   }
 
   stop(): void {
@@ -119,7 +150,7 @@ export class MediaPipeProvider implements CameraProvider {
 
       const landmarksGroup = this.selectLargestPose(result.landmarks)
       const rawLms: RawLandmark[] = landmarksGroup.map(lm => ({
-        x: this.cfg.mirrorX ? 1 - lm.x : lm.x,
+        x: this.facingMode === 'user' ? 1 - lm.x : lm.x,
         y: lm.y,
         z: lm.z ?? 0,
         confidence: lm.visibility ?? 0,
