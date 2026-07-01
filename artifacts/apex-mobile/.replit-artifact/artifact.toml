@@ -1,0 +1,27 @@
+kind = "mobile"
+previewPath = "/apex-mobile/"
+title = "Apex Mobile"
+version = "1.0.0"
+id = "artifacts/apex-mobile"
+router = "expo-domain"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+ensurePreviewReachable = "/status"
+name = "expo"
+paths = [ "/apex-mobile/" ]
+localPort = 22796
+
+[services.development]
+run = "pnpm --filter @workspace/apex-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/apex-mobile", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/apex-mobile", "run", "serve" ]
+
+[services.env]
+PORT = "22796"
+BASE_PATH = "/apex-mobile/"
